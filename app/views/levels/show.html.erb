@@ -1,0 +1,15 @@
+
+
+<p>
+  <b>Nombre:</b>
+  <%= @level.name %>
+</p>
+
+<p>
+  <b>Puntos:</b>
+  <%= @level.points %>
+</p>
+
+
+<%= link_to t('.edit', :default => t("helpers.links.edit")), edit_level_path(@level) %> |
+<%= link_to t('.back', :default => t("helpers.links.back")), levels_path %>

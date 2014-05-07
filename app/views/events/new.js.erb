@@ -1,0 +1,55 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var campusPolygon = "<%=@campus.encoded_polygon %>";	// polígono del campus asociado
+
+// Cargamos contenido del modal
+$("#modal-event").html('<%= j render("form") %>');
+
+<% if !@event.errors.any? %>
+// Desactivamos el evento 'shown'
+$('#modal-event').off('shown');
+// Lo volvemos a reactivar (hacemos esto para subscribirnos una única vez)
+$('#modal-event').on('shown', function(){
+	// Inicializamos el mapa:
+	pointsMap = new MapWrapper('modal-event');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+	
+	// Inicializamos el date time picker:
+  $('.datetimepicker').datetimepicker();
+  $('#event_category_ids').select2();
+});
+<% else %>
+	// Inicializamos el mapa:
+	pointsMap = new MapWrapper('modal-event');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+
+	// Si había un marcador, lo redibujamos:
+	<% if !@event.latitude.nil? && !@event.longitude.nil? %>
+		var id = "new_point";														// id del punto a cargar
+		var latitude = <%= @event.latitude %>;					// Latitud del punto a cargar
+		var longitude = <%= @event.longitude %>;				// Longitud del punto a cargar
+		var description = "<%= @event.description %>";	// Descripción del punto de interés
+
+		// Cargamos el punto en el mapa del campus, indicando que corresponde a un poi:
+		pointsMap.editMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER);
+	<% end %>	
+
+	// Inicializamos el date time picker:
+  $('.datetimepicker').datetimepicker();
+  $('#event_category_ids').select2();
+
+<% end %>
+
+HelpInfo('Haz click en el mapa para seleccionar la ubicación del evento');

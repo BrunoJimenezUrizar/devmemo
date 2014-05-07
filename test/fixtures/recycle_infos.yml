@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  mobile_user_id: 1
+  dump_id: 1
+  
+
+two:
+  mobile_user_id: 1
+  dump_id: 1
+  

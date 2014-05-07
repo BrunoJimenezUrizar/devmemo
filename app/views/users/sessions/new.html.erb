@@ -1,0 +1,24 @@
+<div class="row">
+<div id="welcome" class="span12">
+<div id="login_img" class="span9">
+</div>
+<div class="span3">
+	<div id="form_container" class="well well-small">
+		<div class="form_centered">
+		<h2>Inicio Sesión</h2>
+		<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+		  <%= f.input :email, :autofocus => true, :label => t("activerecord.attributes.user.email") %>
+		  <%= f.input :password, :label => t("activerecord.attributes.user.password")%>
+		  <%= f.button :submit, "Ingresar", :class => 'btn-primary' %>
+		  <div class="remember_me">
+		  <%= f.input :remember_me, :inline_label => t("messages.user.log_in.remember_me"), :label =>false, :as => :boolean if devise_mapping.rememberable? %>
+		  </div>
+		<% end %>
+		<%= render "devise/shared/links" %>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<div class="span3 offset4"> <%=link_to(image_tag("google-play.png"), "https://play.google.com/store/apps/details?id=com.scampus.especial1&hl=es")%> </div>
+

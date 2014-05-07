@@ -1,0 +1,32 @@
+<div class="well sidebar-nav">
+  <ul class="nav nav-list">
+    <% if controller.controller_name == 'campuses' && controller.action_name == 'show' %>
+        <li class="nav-header"><%= @university.acronym %></li>
+        <% @university.campuses.each do |campus| %>
+            <% if campus.id == @campus.id %>
+                <% @class = "active" %>
+            <% else @class = "" %>
+            <% end %>
+            <li class="<%= @class %>"><%= link_to campus.name, university_campus_path(@university, campus) %></li>
+        <% end %>  
+        <li class="divider"></li>     
+        <li class="nav-header">Categorías</li>
+        <li><%= link_to "Administrar", university_categories_path(@university) %></li>
+        <li class="divider"></li>
+        <li class="nav-header">Tipos</li>
+        <li><%= link_to "Administrar", university_types_path(@university) %></li>
+    <% end %>
+    <% if controller.controller_name == 'categories' %>
+        <li class="nav-header"><%= @university.acronym %></li>
+        <% @university.campuses.each do |campus| %>
+            <li><%= link_to campus.name, university_campus_path(@university, campus) %></li>
+        <% end %>
+        <li class="divider"></li>
+        <li class="nav-header">Categorías</li>
+        <li class="active"><%= link_to "Administrar", university_categories_path(@university) %></li>
+        <li class="divider"></li>
+        <li class="nav-header">Tipos</li>
+        <li><%= link_to "Administrar", university_types_path(@university) %></li>
+    <% end %>
+  </ul>
+</div>

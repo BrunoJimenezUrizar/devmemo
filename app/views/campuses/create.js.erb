@@ -1,0 +1,9 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = "<%= @campus.id %>";										// id del edificio a cargar
+var polygon = "<%=@campus.encoded_polygon %>";	// polígono asociado al edificio
+var university_accordion = "#collapse_university<%= @campus.university_id %> .accordion-inner";
+
+// Cargamos contenido del modal
+$('#modal-building').modal('hide');
+$(university_accordion).prepend('<%= j render(@campus) %>');

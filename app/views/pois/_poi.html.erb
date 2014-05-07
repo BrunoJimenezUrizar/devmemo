@@ -1,0 +1,18 @@
+<div class="accordion-group" id="accordion-border-style">
+	<div class="accordion-heading">
+		<a class="accordion-toggle collapsed" id="edit_poi_<%= poi.id %>" data-toggle="collapse" data-parent="#accordion_poi" href="#collapse_poi<%= poi.id %>">
+			<%= poi.name %>
+			<%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, [poi.campus.university, poi.campus, poi], :class => 'btn btn-mini delete_btn float_right form_btn', :confirm => '¿Estás seguro que deseas eliminar este punto de interés? Esta acción no se puede deshacer.', :method => :delete,:title => "Eliminar", remote: true %>
+			<%= link_to '<i class="icon-pencil icon-white"></i>'.html_safe, edit_university_campus_poi_path(poi.campus.university, poi.campus, poi), :class => "btn btn-mini edit_btn float_right form_btn", :data => {:toggle=>"modal", :target => '#modal-poi'},:title => "Editar", remote: true %>
+	 	</a>
+    </div>
+    <div id="collapse_poi<%= poi.id %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+      	<%if poi.categories[0]%>
+			<%= render poi.categories %>
+		<%else%>
+		<p>No tiene categorías</p>
+		<%end%>
+      </div>
+    </div>
+  </div>

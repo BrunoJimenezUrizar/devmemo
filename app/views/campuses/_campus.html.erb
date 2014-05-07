@@ -1,0 +1,12 @@
+<% if current_user.has_role? :super_admin or University.with_role(:university_admin, current_user).map(&:id).include?(campus.university.id) or Campus.with_role(:campus_admin, current_user).map(&:id).include?(campus.id) or Campus.with_role(:admin, current_user).map(&:id).include?(campus.id) %>
+	<div id="campus_<%= campus.id %>" class="university_inner clearfix">
+	<i class="icon-leaf"></i> <%= link_to campus.name, university_campus_path(campus.university, campus) %>
+			<div id="campus_actions">
+				<% if current_user.has_role? :super_admin or University.with_role(:university_admin, current_user).map(&:id).include?(campus.university.id) or Campus.with_role(:campus_admin, current_user).map(&:id).include?(campus.id) %>
+					<%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, [campus.university, campus], :class => "btn btn-mini float_right delete_btn", method: :delete, data: { confirm: '¿Estás seguro que deseas eliminar este campus? Esta acción no se puede deshacer.' }, remote: true %>
+					<%= link_to '<i class="icon-pencil icon-white"></i>'.html_safe, edit_university_campus_path(campus.university, campus), :class =>  "btn btn-mini float_right edit_btn", :data => {:toggle=>"modal", :target => '#modal-building'}, remote: true %>
+				<% end %>
+					<%= link_to '<i class="icon-user icon-white"></i>'.html_safe, campus_admin_users_path(campus.id, :campus_id => campus.id), :id => 'edit_campus_roles', :class => 'btn btn-mini float_right edit_btn form_btn', :campus_id => campus.id %>
+			</div>
+	</div>
+<% end %>

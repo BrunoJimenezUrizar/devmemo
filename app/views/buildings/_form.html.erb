@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    
+    <h3 id="myModalLabel"><%= @modal_title %></h3>
+  </div>
+<div class="modal-body">
+  <%= link_to 'Ayuda', "#", :class=>"info"%> 
+  <div id="polygonMap_canvas" data-map-output="map" class="map_modal"></div>
+
+
+  <%= simple_form_for [@university, @campus, @building], :validate => true, remote: true do |f| %>
+    
+    <%= f.error_notification %>
+      <%if @building.errors.any?%>
+      <div class= "field_with_errors"><%= @building.errors[:polygon][0]%></div>
+      <%end%>
+    <div class="form-inputs">
+    <%= f.input :name, :label=>"Nombre",:placeholder => "Nombre del edificio" %>
+    <%= f.hidden_field :polygon_s, "data-map-output" => "polygon" %>
+    <button id="reDraw" data-map-input="polygon-redraw" class="btn" aria-hidden="true" disabled="disabled">Redibujar</button>
+    </div>
+
+  <% end %>
+    
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+    <button class="btn btn-primary" id="building-save">Guardar</button>
+</div>

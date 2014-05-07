@@ -1,0 +1,33 @@
+<%= form_for @dump, :validate => true do |f| %>
+  <% if @dump.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dump.errors.count, "error") %> prohibited this dump from being saved:</h2>
+
+      <ul>
+      <% @dump.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :qr_code %><br />
+    <%= f.text_field :qr_code %>
+  </div>
+  <div class="field">
+    <%= f.label :type_id %><br />
+    <%= f.number_field :type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :por_id %><br />
+    <%= f.number_field :por_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

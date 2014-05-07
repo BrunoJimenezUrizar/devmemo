@@ -1,0 +1,12 @@
+<%= simple_form_for(@level) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :points %>
+  </div>
+<%= f.file_field :image %>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

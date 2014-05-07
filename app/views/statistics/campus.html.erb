@@ -1,0 +1,38 @@
+
+<h2 class="text-center">Estadísticas de 
+	
+	<% @campus.each do |campus|%>
+	<%if campus == @campus.first%>
+	<%= campus.name  %>
+	<%else%>
+	 <%= " /" << campus.name  %>
+	<%end%>
+	<%end%>
+	
+
+</h2>
+
+<div class="well clearfix ">
+<div id='chart' class="span6"></div>
+<%= render_chart(@chart, 'chart') %>
+
+<div class="span5 offset1">
+<h3>Estadísticas por Punto de reciclaje</h3>
+
+<%= form_tag('pors', :id=> "campus_form") do %>
+
+<div>
+Puntos de Reciclaje: <%= select_tag "por", options_from_collection_for_select(@pors, "id", "stat_name"), multiple:true%>
+</div>
+<br>
+	Desde: <%= text_field_tag "from",l(@from_date, :format=>"%Y-%m-%d"),:type=>"date"%><br>
+	Hasta: <%= text_field_tag "to",l(@to_date, :format=>"%Y-%m-%d"),:type=>"date"%><br>
+	<% @campus.each do |campus|%>
+	<%= hidden_field_tag "campus[]", campus.id %>
+	<%end%>
+	<%= submit_tag "Ir a estadísticas", :class=>"btn"%>
+<%end%>
+
+<%= link_to "volver", "show", :class=>"btn"%>
+</div>
+</div>

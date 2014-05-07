@@ -1,0 +1,135 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.field-input{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.menu-campus{
+	padding-left:10px;
+}
+
+.title-search-campus{
+	border-bottom: 1px solid #2c3e50;
+}
+
+.search-menu{
+	float: left;
+    vertical-align: center;
+    padding-right: auto;
+    height: 290px;
+}
+
+.expanded{
+	overflow-y:auto; 
+	height: 80px;
+}
+.expanded-custom{
+	overflow-y:auto; 
+	min-height: 34px;
+	max-height: 102px;
+}
+.well-principal{
+	min-height: 350px !important;
+}
+.span-search{
+	padding-top: 15px;
+}
+
+.mapa{
+	height: 330px;
+	padding: 7px;
+}
+
+#map_canvas{
+	height: 100%;
+	width: 100%;
+}
+
+div#campus_show{
+	height: auto;
+}
+		
+/* Regla para mostrar los componentes sin acordeón de la misma
+forma que los que sí tienen acordeón: */
+.campus_component{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	margin-bottom: 0px;
+	padding: 8px 15px;
+	cursor: default;
+}
+
+/* Seleccionamos los botones precedidos por el header del
+accordion y los desplazamos hacia arriba para alinearlos*/
+div.accordion-heading a.accordion-toggle ~ a.edit_btn{ margin-top: -26px; }
+div.accordion-heading a.accordion-toggle ~ a.edit_btn.btn-primary{ 
+	color: #ffffff;
+	background-color: #0044cc;
+}
+
+div.accordion-heading a.accordion-toggle ~ a.delete_btn { margin-top: -26px; }
+div.accordion-heading a.accordion-toggle ~ a.delete_btn.btn-danger {
+	color: #ffffff;
+	background-color: #bd362f;
+}
+
+div.accordion-heading label.campus_component ~ a.edit_btn { margin-top: -26px; }
+div.accordion-heading label.campus_component ~ a.edit_btn.btn-primary {
+	color: #ffffff;
+	background-color: #0044cc;
+}
+
+div.accordion-heading label.campus_component ~ a.delete_btn { margin-top: -26px; }
+div.accordion-heading label.campus_component ~ a.delete_btn.btn-danger {
+	color: #ffffff;
+	background-color: #bd362f;
+}
+
+/* agregamos padding top y bottom a los basureros de un por para
+que los marcadores se muestren alineados a la derecha: */
+div.por_inner, div.university_inner{ padding: 2px 0px 2px 0px; }
+div.por_inner:hover, div.university_inner:hover{ background-color: lightgrey; }
+
+/* ampliamos el ancho de accordion-body al 100%: */
+div.accordion-body{ width: 100%; }
+
+/* Reglas para fijar el alto de los acordeones: */
+div.accordion{
+	height: 185px;
+	overflow-y: auto;
+}
+
+
+/* Con esta regla se puede scrollear hasta el footer del modal: */
+/* (Sin embargo, la vista 'salta' al header del modal al abrirlo)
+div.modal{ 
+	position: absolute; 
+	top: 15%;
+}
+*/
+
+/* Reglas para ajustar el modal al alto de la ventana */
+div.modal.fade.in { height: 80%; }
+
+div.modal div.modal-body{
+	position: absolute;
+	width: 94%;
+	top: 50px;
+	bottom: 60px;
+}
+
+div.modal div.modal-footer{
+	position: absolute;
+	width: 94%;
+	bottom: 0px;
+}
+
+.well-search{
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+}

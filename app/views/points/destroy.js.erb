@@ -1,0 +1,9 @@
+// Variables que usaremos para eliminar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = "<%= @poi.id %>";											// id del punto a eliminar
+
+// Eliminamos el registro del listado de pors:
+$('#edit_poi_' + id).parent().parent().remove();
+
+// Quitamos el marcador del mapa del campus:
+deleteMarker(id, campusMap, MarkerType.POI_MARKER);

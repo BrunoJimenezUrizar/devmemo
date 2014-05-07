@@ -1,0 +1,12 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = <%= @por.id %>;																	// id del punto a cargar
+var latitude = <%= @por.latitude %>;											// Latitud del punto a cargar
+var longitude = <%= @por.longitude %>;										// Longitud del punto a cargar
+
+// Oculatamos el modal y cargamos el html del punto en el listado de pors:
+$('#modal-por').modal('hide');
+$('#edit_por_<%= @por.id %>').parent().parent().replaceWith('<%= j render(@por) %>');
+
+// Cargamos el punto en el mapa del campus, indicando que corresponde a un por:
+campusMap.loadMarker(id, latitude, longitude, "Punto de reciclaje", MapWrapper.MarkerType.POR_MARKER);

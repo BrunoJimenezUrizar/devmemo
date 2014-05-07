@@ -1,0 +1,4 @@
+<div id="edit_category_<%= category.id %>">
+<i class="icon-flag"></i> <%= category.name %><% if controller.controller_name == 'categories' %> <%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_university_category_path(category.university, category), :data => {:toggle=>"modal", :target => '#modal-category'}, remote: true %>
+	<%= link_to '<i class="icon-remove"></i>'.html_safe, [category.university, category], :confirm => '¿Estás seguro que deseas eliminar esta categoría? Esta acción no se puede deshacer.', :method => :delete, remote: true %><% end %><br>
+</div>

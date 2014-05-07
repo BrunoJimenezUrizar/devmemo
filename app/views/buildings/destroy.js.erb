@@ -1,0 +1,21 @@
+// Variables que usaremos para eliminar el edificio:
+// -----------------------------------------------------------------------------------------
+var id = "<%= @building.id %>";									// id del edificio a cargar
+
+// Eliminamos el registro del listado de edificios:
+$('#edit_building_' + id).parent().parent().remove();
+
+// Quitamos el polígono del mapa del campus:
+campusMap.deleteBuilding(id);
+
+// Redefinimos la función loadBuildings() para agregar los nuevos edificios dibujados:
+function loadBuildings(mapWrapperInstance){
+  //agrega polígonos de edificios al mapa
+  <% @buildings.each do |building| %>
+    var id = "<%= building.id %>";											// id del edificio a cargar
+    var polygon = "<%= building.encoded_polygon %>";   	// polígono asociado al edificio
+
+    // Cargamos el edificio en el mapa del campus:
+    mapWrapperInstance.loadBuilding(id, polygon);
+  <% end %>
+}

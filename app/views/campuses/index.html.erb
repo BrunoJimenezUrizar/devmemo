@@ -1,0 +1,24 @@
+<div class="span5">
+  <h1>Campuses</h1>
+<h3><%= @university.name %></h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @campuses.each do |campus| %>
+  <tr>
+    <td><%= link_to campus.name, university_campus_path(@university, campus) %></td>
+    <td><%= link_to 'Edit', edit_university_campus_path(@university, campus) %></td>
+    <td><%= link_to 'Destroy', [@university, campus], method: :delete, remote: true, data: { confirm: '¿Estas seguro?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Campus', new_university_campus_path(@university) %>
+</div>

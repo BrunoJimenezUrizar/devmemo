@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Editar Punto de Reciclaje</h3>
+  </div>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', [@university, @poi.campus, @poi] %> |
+<%= link_to 'Back', university_campus_pois_path(@university, @poi.campus) %>
+
+<%= render 'maps'%>
+<div id="map_canvas"></div>

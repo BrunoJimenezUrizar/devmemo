@@ -1,0 +1,66 @@
+<h1><%=@advertise.name%></h1>
+
+<div class="well clearfix">
+  <div class="span12">
+    <div class="offset2 span4">
+      <p>
+        <%= image_tag @advertise.image_advertise %>
+      </p>
+    </div>
+    <div class="span2">
+      <div class="well">
+          <b><%=label :start_date,t('activerecord.attributes.advertise.start_date'),:id=>'title'%></b>
+          <%=l @advertise.start_date %>
+      </div>
+    </div>
+    <div class="span2">
+      <div class="well">
+          <b><%=label :end_date,t('activerecord.attributes.advertise.end_date'), :id=>'title'%></b>
+          <%=l @advertise.end_date %>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <p>
+          <b><%=label :campuses,t('activerecord.attributes.advertise.campuses'), :id=>'title'%></b>
+            <%= get_string_from_array(@advertise.campuses.pluck(:name))%>
+        </p>
+        <p>
+          <b><%=label :link,t('activerecord.attributes.advertise.link'), :id=>'title'%></b>
+            <% if @advertise.link %>
+            <%= link_to @advertise.link%>
+            <% else %>
+            <%= "No hay disponible" %>
+            <%end%>
+        </p>
+      </div>
+    </div>
+    <div class="span4">
+      <!--Muestra estado de la publicidad-->
+      <div class="well">
+        <p>
+          <b><%=t('activerecord.attributes.advertise.active')%></b>
+          <%if @advertise.active %>
+            <%=t('messages.advertise.is_advertise_active')%>
+          <%else%>
+            <%=t('messages.advertise.isnt_advertise_active')%>
+          <%end%>
+        </p>
+        <p>
+          <b><%=t('messages.advertise.is_advertise_active_for_android?')%></b>
+          <%if not show_in_android?(@advertise) %>
+            <%=t('messages.advertise.isnt_advertise_active')%>
+            <b><%=t('messages.general.causes')%></b>
+            <%=get_string_from_array(causes_not_show_in_android(@advertise))+'.'%>
+          <%else%>
+            <%=t('messages.advertise.is_advertise_active')%>
+          <%end%>
+        </p>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_advertise_path(@advertise), :class => 'btn btn-mini' %>
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+                        advertises_path, :class => 'btn btn-mini' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<h1>Listing events</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Start advertising</th>
+    <th>End advertising</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @events.each do |event| %>
+  <tr>
+    <td><%= event.name %></td>
+    <td><%= event.description %></td>
+    <td><%= event.start_date %></td>
+    <td><%= event.end_date %></td>
+    <td><%= event.start_advertising %></td>
+    <td><%= event.end_advertising %></td>
+    <td><%= link_to 'Show', [@university,@campus,event] %></td>
+    <td><%= link_to 'Edit', edit_university_campus_event_path(@university,@campus,event) %></td>
+    <td><%= link_to 'Destroy',[@university,@campus,event], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event', new_university_campus_event_path(@university,@campus,@event) %>

@@ -1,0 +1,25 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = "<%= @building.id %>";										// id del edificio a cargar
+var polygon = "<%=@building.encoded_polygon %>";	// polígono asociado al edificio
+
+// Cargamos contenido del modal
+$('#modal-building').modal('hide');
+$('#accordion_building').prepend('<%= j render(@building) %>');
+
+// Cargamos el edificio en el mapa del campus:
+campusMap.loadBuilding(id, polygon);
+
+// Redefinimos la función loadBuildings() para agregar los nuevos edificios dibujados:
+function loadBuildings(mapWrapperInstance){
+  //agrega polígonos de edificios al mapa
+  <% @buildings.each do |building| %>
+    var id = "<%= building.id %>";											// id del edificio a cargar
+    var polygon = "<%= building.encoded_polygon %>";   	// polígono asociado al edificio
+
+    // Cargamos el edificio en el mapa del campus:
+    mapWrapperInstance.loadBuilding(id, polygon);
+  <% end %>
+}
+
+

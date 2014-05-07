@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Number:</b>
+  <%= @floor.number %>
+</p>
+
+<p>
+  <b>Indoor path:</b>
+  <%= image_tag @floor.indoor_path.url %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @floor.description %>
+</p>
+
+<p>
+  <b>Building:</b>
+  <%= @floor.building_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_university_campus_building_floor_path(@university, @campus, @floor.building, @floor) %> |
+<%= link_to 'Back', university_campus_building_floors_path(@university, @campus, @floor.building) %>

@@ -1,0 +1,34 @@
+<div class="span5 offset3">
+	<div class="well well-large">
+		<h2><%= t('.new', :default => "Registro de usuario") %></h2>
+		<%= simple_form_for @user, :html => { :multipart => true } do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <%if @user.errors.count<=1%>
+        <h2><%= pluralize(@user.errors.count, "error") %> impidió la creación del nuevo usuario:</h2>
+      <%else%>
+        <h2><%= pluralize(@user.errors.count, "errores") %> impidieron la creación del nuevo usuario:</h2>
+      <%end%>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div><%= f.label :name %>
+  <%= f.text_field :name %></div>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div>
+
+  <%= f.button :submit, :class => 'btn btn-medium btn-primary btn' %>
+<% end %>
+	</div>
+</div>

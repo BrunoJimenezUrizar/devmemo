@@ -1,0 +1,32 @@
+<table id="mobile_users_table" class ="table table-bordered">
+  <thead>
+  <tr>
+   
+    <th >Nombre</th>
+    <th >Correo</th>
+    <th >Participación en eventos </th>
+    <%@types.each do |type|%>
+    <th >Reciclaje de <%=type.name%> </th>
+    <%end%>
+    <th >Reciclaje en todas las universidades </th>
+    
+  </tr>
+  </thead>
+<tbody>
+<% @mobile_users.each do |mobile_user| %>
+  
+  <tr>
+    
+    <td><%= mobile_user.name %></td>
+    <td><%= mobile_user.email %></td>
+    <td><%= mobile_user.at_events(@university,@from,@to) %></td>
+    <% @types.each do |type|%>
+    <td ><%=mobile_user.recycles(@from,@to)[type].to_s<< "%"%></td>
+    <%end%> 
+    <td><%= mobile_user.recycles(@from,@to)["all"]%></td>
+
+  </tr>
+<% end %>
+</tbody>
+</table>
+</div>

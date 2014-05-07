@@ -1,0 +1,81 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+ 
+.well{
+	background-color: #ecf0f1;
+	color: #2c3e50;
+	background-image: none;
+	background-image: none;
+	background-image: none;
+	border: none;
+}
+
+.navbar-inner{
+	background-color: #178F0B;
+	background-color: #2c3e50;
+	background-image: none;
+	background-image: none;
+	background-image: none;
+	border: none;
+}
+
+div.navbar div.navbar-inner a.brand{
+	color: white;
+	float: left;
+	padding: 19.5px 15px;
+	font-size: 19px;
+	line-height: 21px;
+	text-shadow: none;
+	-webkit-text-shadow: none;
+}
+div.navbar > div.navbar-inner ul.nav>li.dropdown>a.dropdown-toggle > .caret{ 
+	border-top-color: white; 
+	border-bottom-color: white; 
+}
+
+div.navbar > div.navbar-inner ul.nav>li.dropdown.open>a{ 
+	background-color: #1a242f;
+	color: white;
+}
+
+div.navbar div.navbar-inner a.brand:hover{ color: #18bc9c; }
+div.navbar > div.navbar-inner ul.nav>li>a:hover{ color: #18bc9c; }
+div.navbar > div.navbar-inner ul.nav>li.dropdown>a.dropdown-toggle:hover > .caret{ 
+	border-top-color: #18bc9c; 
+	border-bottom-color: #18bc9c; 
+}
+
+div.navbar ul.nav>li>a{
+	color: white;	
+	padding: 19.5px 15px;
+	font-weight: normal;
+	text-shadow: none;
+	-webkit-text-shadow: none;
+}
+div.navbar ul.nav>li>a:visited{ color: white; }
+
+div.accordion-heading a:hover, a.accordion-toggle:not(.collapsed){
+	background-color: #2c3e50;
+	color: white;
+	text-decoration: none;
+	background-image: none;
+	background-image: none;
+}
+
+div.accordion-body{
+	background-color: white;
+}
+
+div.modal-header{
+	background-color: #2c3e50;
+	color: white;
+}
+
+div.modal-footer{
+	background-color: #ecf0f1;
+}

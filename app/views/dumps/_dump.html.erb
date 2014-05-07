@@ -1,0 +1,5 @@
+<div class="por_inner">
+<i class="icon-trash"></i> <%= dump.type.name %> <%= link_to '<i class="icon-qrcode"></i>'.html_safe, dump_path(dump), :class => 'btn btn-mini float_right', :data => {:toggle=>"modal", :target => '#modal-qr'},:title => "Codigo QR", remote: true %>
+</div>
+
+

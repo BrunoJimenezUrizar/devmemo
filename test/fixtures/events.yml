@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  start_date: 2013-10-11 13:46:19
+  end_date: 2013-10-11 13:46:19
+  start_advertising: 2013-10-11 13:46:19
+  end_advertising: 2013-10-11 13:46:19
+  coordinates: POINT (-70.61583638191223 -33.49882590270631)
+
+two:
+  name: MyString
+  description: MyString
+  start_date: 2013-10-11 13:46:19
+  end_date: 2013-10-11 13:46:19
+  start_advertising: 2013-10-11 13:46:19
+  end_advertising: 2013-10-11 13:46:19
+  coordinates: POINT (-70.61583638191223 -33.49882590270631)

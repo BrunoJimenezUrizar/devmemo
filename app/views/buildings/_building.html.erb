@@ -1,0 +1,23 @@
+<div class="accordion-group" id="accordion-border-style">
+	<div class="accordion-heading">
+	 	<a class="accordion-toggle collapsed campus_component" id="edit_building_<%= building.id %>" data-toggle="collapse" data-parent="#accordion_building" href="#collapse_building_<%= building.id %>">
+	        <%= building.name %>
+	      </a>
+	
+		<%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, [building.campus.university, building.campus, building], :class => 'btn btn-mini float_right form_btn delete_btn', :confirm => '¿Estás seguro que deseas eliminar este edificio? Esta acción no se puede deshacer.', :method => :delete,:title => "Eliminar", remote: true %>
+		<%= link_to '<i class="icon-pencil icon-white"></i>'.html_safe, edit_university_campus_building_path(building.campus.university, building.campus, building), :class => "btn btn-mini float_right form_btn edit_btn", :data => {:toggle=>"modal", :target => '#modal-building'},:title => "Editar", remote: true %>
+    </div>
+    <div id="collapse_building_<%= building.id %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+      	<div id="floors">
+	      <% if building.floors? %>
+			<%= render building.floors.ordered %>
+	      <%else%>
+	      	<p>No tiene pisos</p>
+	      <%end%>
+	  	</div>
+	      <%= link_to 'Agregar Piso <i class="icon-cross"></i>'.html_safe, new_university_campus_building_floor_path(building.campus.university, building.campus, building), :class => "btn btn-mini float_right form_btn edit_btn", :data => {:toggle=>"modal", :target => '#modal-building'}, :title => "Nuevo Piso", remote: true %>
+      </div>
+    </div>
+   
+  </div>

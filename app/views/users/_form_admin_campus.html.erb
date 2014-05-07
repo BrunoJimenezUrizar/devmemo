@@ -1,0 +1,48 @@
+ <div class="well span5 offset3">
+    <h2><%= @campus.university.name %> / <%= @campus.name %></h2>
+
+<!-- LISTA DE LOS ADMINISTRADORES DE CAMPUS DE ESTA UNIVERSIDAD -->
+	<% admins = [] %>
+	<% users = User.all%>
+	<h3>Administradores de campus:</h3>
+	<% users.each do |user| %>
+		<% campuses = Campus.with_role(:campus_admin, user).map(&:id) %>
+		<% if campuses.include?(@campus.id) %>
+			<div> <%= user.email %>
+				<%= link_to '<i class="icon-remove icon-white"></i>'.html_safe, campus_admin_remove_path(:user_id => user.id, :campus_id => @campus.id, :admin => 1), :class => 'btn btn-mini delete_btn form_btn', :title => "Quitar" %>
+			</div>
+			<% admins << user%>
+		<% end %>
+	<% end %>
+	<% if admins == [] %>
+		<div>No hay administradores de campus en esta universidad.</div>
+	<% end %>
+	<% aux = admins.count %>
+	<h3>Administradores:</h3>
+	<% users.each do |user| %>
+		<% campuses = Campus.with_role(:admin, user).map(&:id) %>
+		<% if campuses.include?(@campus.id) %>
+			<div> <%= user.email %>
+				<%= link_to '<i class="icon-remove icon-white"></i>'.html_safe, campus_admin_remove_path(:user_id => user.id, :campus_id => @campus.id, :admin => 2), :class => 'btn btn-mini delete_btn form_btn', :title => "Quitar" %>
+			</div>
+			<% admins << user%>
+		<% end %>
+	<% end %>
+	<% if admins.count == aux %>
+		<div>No hay administradores en esta universidad.</div>
+	<% end %>
+	<% admins = admins + User.with_role(:super_admin) %>
+
+    <div class="barra"></div>
+
+    <%= form_tag({ :controller => "users", :action => "campus_admin_create"}, :class=>"form-inline") do %>
+      <%= select_tag "user", options_from_collection_for_select(User.all - admins, "id", "email"), :id=>"select_admin_campus"  %>
+      <% if Campus.with_role(:admin, current_user).map(&:id).include?(@campus.id) =%>
+      	<%= select_tag "admin", options_for_select([["Administrador","2"]])  %>
+      <% else %>
+      	<%= select_tag "admin", options_for_select([["Administrador de Campus", "1"], ["Administrador","2"]])  %>
+      <% end %>
+      <%= hidden_field_tag :campus_id, @campus.id %>
+      <%= submit_tag "Agregar", :class => "btn" %>
+    <% end %>
+  </div>

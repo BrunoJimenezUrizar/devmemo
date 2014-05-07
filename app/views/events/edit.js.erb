@@ -1,0 +1,57 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var campusPolygon = "<%=@campus.encoded_polygon %>";	// polígono del campus asociado
+
+var id = <%= @event.id %>;													// id del punto a cargar
+var latitude = <%= @event.latitude %>;							// Latitud del punto a cargar
+var longitude = <%= @event.longitude %>;						// Longitud del punto a cargar
+var description = "<%= @event.description %>";			// Descripción del punto de interés
+
+// Cargamos contenido del modal
+$("#modal-event").html('<%= j render("form") %>');
+$('img[alt=Missing]#edit_image').hide();
+$('img[alt=Missing]#edit_image').after("Este evento no tiene imagen");
+
+<% if(!@event.errors.any?) %>
+// Desactivamos el evento 'shown' y lo reactivamos (hacemos esto para subscribirnos una única vez)
+$('#modal-event').off('shown');
+
+$('#modal-event').on('shown', function(){
+
+	// Inicializamos el mapa en la posición deseada:
+	pointsMap = new MapWrapper('modal-event');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+
+	// Cargamos el punto en el mapa del campus, indicando que corresponde a un poi:
+	pointsMap.editMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER);
+	
+	// Inicializamos el date time picker:
+  $('.datetimepicker').datetimepicker();
+  $('#event_category_ids').select2();
+});
+<% else %>
+	// Inicializamos el mapa en la posición deseada:
+	pointsMap = new MapWrapper('modal-event');
+	pointsMap.setCampus(campusPolygon);
+
+	// Cargamos el punto en el mapa del campus, indicando que corresponde a un poi:
+	pointsMap.editMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+	
+	// Inicializamos el date time picker:
+  $('.datetimepicker').datetimepicker();
+  $('#event_category_ids').select2();
+<% end %>
+
+HelpInfo('Haz click en el mapa para seleccionar la nueva ubicación del evento');

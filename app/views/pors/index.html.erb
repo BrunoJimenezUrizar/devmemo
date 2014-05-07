@@ -1,0 +1,34 @@
+<h1>Listing pors</h1>
+<%= will_paginate @pors %>
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Campus</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pors.each do |por| %>
+  <tr>
+    <td><%= por.name %></td>
+    <td><%= link_to por.campus.name, [@university, @campus] %></td>
+    <td>
+      <% por.types.each do |type| %>
+          <%= type.name %> 
+      <% end %>
+    </td>
+    <td><%= link_to 'Show', [por.campus.university, por.campus, por] %></td>
+    <td><%= link_to 'Edit', edit_university_campus_por_path(por.campus.university, por.campus, por) %></td>
+    <td><%= link_to 'Destroy', [por.campus.university, por.campus, por], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', university_campus_path(@university, @campus) %>
+<%= render 'maps' %>
+
+<div id="map_canvas" style="width:600px; height:400px"></div>

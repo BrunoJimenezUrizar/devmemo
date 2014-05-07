@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Nueva Pregunta</h3>
+  </div>
+
+<div class="modal-body">
+<%= form_for [@question_group, @question], remote: true, :validate => true, :html => { :class =>
+'form-horizontal' } do |f| %>
+
+  <div class="control-group">
+    <div class="control-label"><%= f.label :type, "Tipo" %></div>
+    <div class="controls"><%= f.select :type, ::Rapidfire::QuestionForm::QUESTION_TYPES, {}, id: "question_type" %></div>
+  </div>
+
+  <div class="control-group">
+    <div class="control-label"><%= f.label :question_text, "Texto Pregunta" %></div>
+   <div class="controls"><%= f.text_field :question_text %></div>
+  </div>
+
+  <div class="control-group">
+    <div class="control-label"><%= f.label :answer_options, "Opciones de Respuesta" %></div>
+   <div class="controls"><%= f.text_area :answer_options, rows: 5 %></div>
+  </div>
+
+  <div class="control-group">
+    <div class="control-label"><%= f.label :answer_presence, "Respuesta Requerida" %></div>
+    <div class="controls"><%= f.check_box :answer_presence %></div>
+  </div>
+  
+
+
+<% end %>
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+    <button class="btn btn-primary" id="question-save">Guardar</button>
+</div>

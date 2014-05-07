@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<H1>
+  <%= @building.name %>
+</H1>
+
+<h6>
+  <%= @building.campus.name %>, <%= @university.acronym %>
+</h6>
+<h4>Floors:</h4>
+<ul>
+<% @building.floors.each do |floor| %>
+  <li><%= floor.number %> <%= link_to floor.description, [@university, @campus, @building, floor] %></li>
+<% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_university_campus_building_path(@university, @building.campus, @building) %> |
+<%= link_to 'Back', university_campus_buildings_path(@university, @building.campus) %>

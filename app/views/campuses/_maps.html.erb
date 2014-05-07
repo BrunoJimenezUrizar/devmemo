@@ -1,0 +1,71 @@
+<script type="text/javascript">
+   
+  var polygon = '<%= "#{@campus.encoded_polygon}" %>';        // polígono asociado al edificio
+
+  function initialize() {
+		// Creamos instancia de MapWrapper y la guardamos en la variable campusMap:
+   		campusMap = new MapWrapper("campus_show");
+   		campusMap.setCampus(polygon);
+  }
+  
+  //inicializa el mapa al cargar la página.
+  google.maps.event.addDomListener(window, 'load', function(){
+    initialize();
+                      
+	  // Cargamos los datos:
+	  loadBuildings(campusMap);
+	  loadPois(campusMap);
+	  loadPors(campusMap);
+	  loadEvents(campusMap);
+  });
+  
+  function loadBuildings(mapWrapperInstance){
+    //agrega polígonos de edificios al mapa
+    <% @buildings.each do |building| %>
+      var id = "<%= building.id %>";											// id del edificio a cargar
+      var polygon = "<%= building.encoded_polygon %>";   	// polígono asociado al edificio
+
+      // Cargamos el edificio en el mapa del campus:
+      mapWrapperInstance.loadBuilding(id, polygon);
+    <% end %>
+  }
+  
+  function loadPois(mapWrapperInstance){
+    // agrega marcadores de puntos de interes.
+    <% @pois.each do |poi| %>
+      var id = <%= poi.id %>; 										// id del punto a cargar
+      var latitude = <%= poi.latitude %>;					// Latitud del punto a cargar
+      var longitude = <%= poi.longitude %>;				// Longitud del punto a cargar
+      var description = '<h4><%= poi.name %></h4><p><b>Descripción:</b><%= poi.description %></p><b>Categorías:</b><ul><% poi.categories.each do |category| %><li><%= category.name %></li><% end %></ul>';
+
+      // Cargamos el marcador en el mapa correspondiente:
+      mapWrapperInstance.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.POI_MARKER); 
+    <% end %>
+  }
+  
+  function loadPors(mapWrapperInstance){
+    //agrega marcadores de puntos de reciclaje.
+    <% @pors.each do |por| %>
+      var id = <%= por.id %>;											// id del punto a cargar
+      var latitude = <%= por.latitude %>;	        // Latitud del punto a cargar
+      var longitude = <%= por.longitude %>;       // Longitud del punto a cargar
+      var description = '<p><b>Descripción:</b><%= por.name %></p><b>Basureros:</b><ul><%por.dumps.each do |dump|%><li><%=dump.type.name%></li><%end%></ul>';
+
+      // Cargamos el marcador en el mapa correspondiente:
+      mapWrapperInstance.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.POR_MARKER); 
+    <% end %>
+  }
+  
+  function loadEvents(mapWrapperInstance){
+    //agrega marcadores de puntos de reciclaje.
+    <% @events.each do |event| %>
+      var id = <%= event.id %>;                  	// id del punto a cargar
+      var latitude = <%= event.latitude %>;	      // Latitud del punto a cargar
+      var longitude = <%= event.longitude %>;     // Longitud del punto a cargar
+      var description = '<h4><%= event.name %></h4><%if event.image.url != "/images/original/missing.png"%><div><%= image_tag event.image.url, class:"event"%></div><%end%><p><b>Descripción:</b><%= event.description %></p><p><b>Fecha de inicio:</b><%= event.start_date %></p><p><b>Fecha de término:</b><%= event.end_date %></p><p><b>Fecha de publicación:</b><br><b>Inicio:</b><%= event.start_advertising %><br><b>Término:</b><%= event.end_advertising %></p><b>Categorías:</b><ul><% event.categories.each do |category| %><li><%= category.name %></li><% end %></ul>';
+
+      // Cargamos el marcador en el mapa correspondiente:
+      mapWrapperInstance.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER); 
+    <% end %>
+  }
+</script>

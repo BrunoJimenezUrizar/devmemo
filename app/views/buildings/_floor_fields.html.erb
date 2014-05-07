@@ -1,0 +1,12 @@
+<fieldset>
+  <%= f.label :number, "Floor" %><br />
+  <%= f.number_field :number %><br />
+   <div class="field">
+    <%= f.label :indoor_path %><br />
+    <%= f.file_field :indoor_path %>
+  </div>
+  <%= f.label :description, "Description" %><br />
+  <%= f.text_field :description %><br />
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Remove Building" %>
+</fieldset>

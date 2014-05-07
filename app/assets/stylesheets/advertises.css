@@ -1,0 +1,146 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+h1{
+	text-align: center;
+}
+
+#title{
+	font-weight: bold;
+}
+
+#error_explanation
+{
+	margin: auto;
+}
+
+.empty_table {
+    height: 110px;
+    background-color: #FBF9B0;
+    -webkit-border-radius: 0px 0px 10px 10px;
+    padding: 10px 25px;
+}
+
+.not-results {
+    height: 60px;
+    background-color: #FBF9B0;
+    -webkit-border-radius: 0px 0px 10px 10px;
+    padding: 10px 25px;
+}
+
+.menu{
+    background-color:#728AA3;
+    min-width: 265px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.new-link{
+    padding-left: 10px;
+    vertical-align: middle;  
+    display: block;
+    float: left;
+    height: 30px;
+    padding-bottom: 10px;
+}
+
+.new-link a{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.search{
+    height: 30px;
+    vertical-align: center;
+    float: left;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-left: 10px;
+    padding-right: auto;
+}
+
+.search #search input{
+    width: 30px;
+}
+
+.search .boton-busqueda{
+    padding-right: 30px;
+}
+
+.report-show{
+    display: block;
+    float: left;
+    width: 246px;
+    border-color: black;
+    border-width: 3px;
+    border-style: solid;
+    background-color: #FFFFFF;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+    padding: 15px 10px 15px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 32px;
+    box-sizing: border-box;
+}
+
+.reports{
+    width: auto;   
+    padding-top: 30px;
+    background-color:#728AA3;
+    overflow:auto;
+    min-width: 345px;
+    padding-bottom: 30px;
+}
+
+.reports-inside{
+    min-width: 265px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.report-show .report-image{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.report-show .report-image img{
+    width: 225px;
+    height: 130px;
+}
+
+.report-show .title-report{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.report-show .title-report a{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.report-show .links{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.report-show .dates{
+    padding-top: 10px;
+    text-align: center;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.report-show .status{
+    padding-top: 10px;
+    text-align: center;
+    padding-left: 12.5px;
+    padding-right: 12.5px;
+}
+
+.field-name{
+    font-weight: bold;
+    display: inline;
+}

@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @por.name %>
+</p>
+
+<p>
+  <b>Campus:</b>
+  <%= @por.campus.name %>
+</p>
+
+
+<%= link_to 'Back', university_campus_path(@por.campus.university, @por.campus) %>
+
+<%= render 'maps' %>
+
+<div id="map_canvas" style="width:600px; height:400px"></div>

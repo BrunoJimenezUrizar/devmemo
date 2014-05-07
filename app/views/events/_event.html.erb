@@ -1,0 +1,20 @@
+<div class="accordion-group" id="accordion-border-style">
+	<div class="accordion-heading">
+		<a class="accordion-toggle collapsed" id="edit_event_<%= event.id %>" data-toggle="collapse" data-parent="#accordion_event" href="#collapse_event<%= event.id %>">
+			<%= event.name %>
+	 	</a>
+	
+		<%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, [event.campus.university, event.campus, event], :class => 'btn btn-mini delete_btn float_right form_btn', :confirm => '¿Estás seguro que deseas eliminar este evento? Esta acción no se puede deshacer.',:title => "Eliminar", :method => :delete, remote: true %>
+		<%= link_to '<i class="icon-pencil icon-white"></i>'.html_safe, edit_university_campus_event_path(event.campus.university, event.campus, event), :class => "btn btn-mini edit_btn float_right form_btn",:title => "Editar", :data => {:toggle=>"modal", :target => '#modal-event'}, remote: true %>
+		<%= link_to '<i class="icon-qrcode icon-white"></i>'.html_safe, [event.campus.university, event.campus, event], :class => 'btn btn-mini edit_btn float_right form_btn', :data => {:toggle=>"modal", :target => '#modal-qr'},:title => "Codigo QR", remote: true %>
+    </div>
+    <div id="collapse_event<%= event.id %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+      	<% if event.categories[0]%>
+			<%= render event.categories %>
+		<%else%>
+		<p>No tiene categorías</p>
+		<%end%>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"><%= @modal_title %></h3>
+  </div>
+
+  <div class="modal-body">
+<%= simple_form_for [@university, @category], :validate => true, remote: true do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.text_field :name, :placeholder => 'Nombre' %>
+  </div>
+
+<% end %>
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+    <button class="btn btn-primary" id="category-save">Guardar</button>
+</div>

@@ -1,0 +1,17 @@
+<div id="campuses-<%= user.id %>" class="modal hide fade in" style="display: none; ">
+<%= simple_form_for user, :url => "users/#{user.id}/update_campuses_user", :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+  <div class="modal-header">  
+    <a class="close" data-dismiss="modal">×</a>  
+    <h3><%=t("helpers.actions.change_campus")%></h3>  
+  </div>  
+  <div class="modal-body">
+    <div class="accordion" id="accordion-universities-<%= user.id%>">
+      <%= render partial: 'universities', locals:{user: user} %> 
+    </div>   
+  </div>  
+  <div class="modal-footer">  
+    <%= f.submit t("helpers.actions.change_campus"), :class => "btn" %>
+    <a class="btn" data-dismiss="modal" href="#">Close</a>
+  </div> 
+<% end %>
+</div>

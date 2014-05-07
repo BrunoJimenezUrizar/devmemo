@@ -1,0 +1,100 @@
+<div class="row offset1">
+	<!-- Barra izquierda con la lista de todas las denuncias del campus -->
+	<div class="well well-large span6 clearfix">
+	  <h2>
+	    Denuncias
+	      <%= link_to '<i class="icon-plus"></i>'.html_safe, new_university_campus_complaint_path(@university, @campus), :class => "btn", :class => 'btn', :title => "Nueva Denuncia" %>
+	      <%= link_to '<i class="icon-pencil"></i>'.html_safe, university_complaint_types_path(@university), :class => "btn", :title => "Administrar tipos de encuestas" %>
+	  </h2>
+	  <hr/>
+
+	  <table id="complaints" class="table table-striped">
+	    <thead>
+	      <tr>
+	      	<th>Fecha</th>
+	        <th>Descripcion</th>
+	        <th>Estado</th>
+	        <th>Tipo</th>
+	        <!--<th>Campus</th>
+	        <th>Usuario</th>-->
+	        <th></th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <%= render @complaints %>
+	    </tbody>
+	  </table>
+	</div>
+	<!-- //////////////////////////////////////////////////////// -->
+
+	<!-- Show de la denuncia -->
+	<div class="well well-large span6 clearfix">
+		<p id="notice"><%= notice %></p>
+
+		<h2>
+		  <b>Denuncia #<%= @complaint.id %></b>
+		</h2>
+
+		<p>
+		  <%= @complaint.description %>
+		</p>
+
+		<p>
+		  <b id="edit-status">Estado:</b>	  
+		  <%= best_in_place @complaint, :status, type: :select, collection: [["Recibida", "Recibida"], ["Vista","Vista"], ["Solucionada", "Solucionada"]], :path => university_campus_complaint_path(@university, @campus, @complaint) %>
+		</p>
+		<p>
+		  <b>Usuario:</b>
+		  <%= @complaint.mobile_user.email %>
+		</p>
+
+		<p>
+		  <b>Campus:</b>
+		  <%= @complaint.campus.name %>
+		</p>
+		<div id="video">
+			<% if @complaint.video? %>
+				<%= video_tag(@complaint.video.url, :controls => true, :width => '350') %>
+			<% end %><br>
+		</div>
+
+		<div id="image">
+			<% if @complaint.photo? %>
+				<%= image_tag @complaint.photo.url(:medium) %>
+			<% end %>
+		</div>
+
+		
+		<%= render 'maps'%>
+        <div class= "map_complaint">
+		<div id="complaint_show" class="map_modal"></div>
+	    </div>
+	   
+		<p><b>Comentarios:</b></p>
+
+		<div id="coments">
+			<%= render @comments %>
+		</div>
+		<br>
+
+		<div id="new_comment" class="well well-comment clearfix">
+			<%= form_for([@university, @campus, @complaint, @complaint.comments.build], remote: true) do |f| %>
+			<div class="field">
+				<%= f.hidden_field :user_id, value: "#{current_user.id}" %>
+			</div>	
+			<div class="field">
+				<%= f.text_area :body %>
+			</div>
+			<label class="checkbox">
+      			<%= f.check_box :public %> ¿Comentario publico?
+    		</label>
+			<div class="actions">
+				<%= f.submit "Comentar", :class => "btn float_left" %>
+			</div>
+			<% end %>
+		</div>
+		<br>
+
+	</div>
+</div>

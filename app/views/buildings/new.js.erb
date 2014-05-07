@@ -1,0 +1,45 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var campusPolygon = "<%=@campus.encoded_polygon %>";	// polígono del campus asociado
+ 
+// Cargamos contenido del modal
+$("#modal-building").html('<%= j render("form") %>');
+
+<% if !@building.errors.any? %> 
+// Desactivamos el evento 'shown'
+$('#modal-building').off('shown');
+// Lo volvemos a reactivar (hacemos esto para subscribirnos una única vez)
+$('#modal-building').on('shown', function(){
+	// Inicializamos el mapa:
+	polygonMap = new MapWrapper('modal-building');
+	polygonMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(polygonMap);
+  loadPois(polygonMap);
+  loadPors(polygonMap);
+  loadEvents(polygonMap);
+});
+<% else %>
+	// Inicializamos el mapa:
+	polygonMap = new MapWrapper('modal-building');
+	polygonMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(polygonMap);
+  loadPois(polygonMap);
+  loadPors(polygonMap);
+  loadEvents(polygonMap);
+	
+	// Si tiene un polígono asociado, lo dibujamos
+	<% if @building.encoded_polygon != nil %>
+		var id = "new_building";													// id del edificio a cargar
+		var polygon = "<%=@building.encoded_polygon %>";	// polígono asociado al edificio
+	
+		// Cargamos polígono asociado en el mapa:
+		polygonMap.editBuilding(id, polygon);		
+	<% end %>
+<% end %>
+
+//mensaje de ayuda
+HelpInfo('-Haz click en cada uno de los vértices del edificio para dibujar el polígono que lo delimita. <br> -Puedes comenzar nuevamente haciendo click en "redibujar".');

@@ -1,0 +1,32 @@
+<% if current_user.has_role? :super_admin or University.with_role(:university_admin, current_user).map(&:id).include?(university.id) or Campus.with_role(:campus_admin, current_user).map(&:university_id).include?(university.id) or Campus.with_role(:admin, current_user).map(&:university_id).include?(university.id) %>
+  <div class="accordion-group" id="accordion-border-style">
+    <div class="accordion-heading university">
+      <div class="img-container">
+          <%= image_tag university.logo , id:"small-logo"%>
+      </div>
+      <a class="accordion-toggle collapsed university" id="edit_university_<%= university.id %>" data-toggle="collapse" data-parent="#accordion_university" href="#collapse_university<%= university.id %>">
+        <div class="university-name">
+          <%= university.name %>
+        </div>  
+      </a>
+      <% if current_user.has_role? :super_admin %>
+        <%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, university, :class => 'btn btn-mini delete_btn float_right form_btn', :confirm => '¿Estás seguro que deseas eliminar esta universidad? Esta acción no se puede deshacer.', :method => :delete, remote: true %>
+        <%= link_to '<i class="icon-user icon-white"></i>'.html_safe, university_admin_users_path(university.id, :university_id => university.id), :id => 'edit_university_roles' , :class => 'btn btn-mini float_right edit_btn form_btn', :university_id => university.id %>
+        <%= link_to '<i class="icon-pencil icon-white"></i>'.html_safe, edit_university_path(university), :class => "btn btn-mini edit_btn float_right form_btn", :data => {:toggle=>"modal", :target => '#modal-university'}, remote: true %>
+      <% end %>
+    </div>
+    <div id="collapse_university<%= university.id %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <% if university.campuses[0] %>
+          <%= render university.campuses %>
+        <% else %>
+          <p>Esta universidad no tiene campus creados</p>
+        <% end %>      
+  			<br>
+        <% if current_user.has_role? :super_admin or University.with_role(:university_admin, current_user).map(&:id).include?(university.id) %>
+          <%= link_to '<i class="icon-plus"></i> Agregar campus'.html_safe, new_university_campus_path(university), :data => {:toggle=>"modal", :target => '#modal-building'}, remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

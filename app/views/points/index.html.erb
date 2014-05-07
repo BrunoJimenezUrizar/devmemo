@@ -1,0 +1,79 @@
+<h1>Puntos de Interés</h1>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+<%= search_form_for @search do |f| %>
+  <p>
+    <%= f.label :type_name_cont, "Tipo:" %>
+    <%= f.collection_select(:type_name_eq, Type.all, :name, 'name', :include_blank => true) %>
+    <%= f.submit "Buscar" %>
+  </p>
+<% end %>
+    
+<table class="table table-striped">
+  <tr>
+    <th><%= sort_link @search, :name, "Nombre" %></th>
+    <th><%= sort_link @search, :description, "Descripción" %></th>
+    <th><%= sort_link @search, :type_name, "Tipo" %></th>
+    <th><%= sort_link @search, :Ubicación, "Ubicación" %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @points.each do |point| %>
+    <tr>
+      <td><%= point.name %></td>
+      <td><%= point.description %></td>
+      <td><%= point.type.name %></td>
+      <td><%= point.location %></td>
+      <td><%= link_to 'Ir', point %></td>
+      <td><%= link_to 'Editar', edit_point_path(point) %></td>
+      <td><%= link_to 'Eliminar', point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+ <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB3CZwdEZQ4pVYPJ6Xf4e0ZJ_zn0ZpN9cU&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+       
+        var mapOptions = {
+          center: new google.maps.LatLng(-33.498172636004796,-70.61200618743896),
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.SATELLITE
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+        
+       <% @points.each do |point| %>
+        var marcador = new google.maps.Marker({
+            position : new google.maps.LatLng(<%=point.latitude%>, <%=point.longitude%>),
+            map : map,
+            title: "<%=point.name%>"
+        });
+        
+        google.maps.event.addListener(marcador, "click", function() {
+            window.location.href = '/points/<%= point.id %>';
+        });
+
+        <% end %>
+        
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+
+<%= button_to 'Crear Nuevo Punto', new_point_path, :class=>'btn btn-large btn-primary' %>
+</br>
+</br>
+<div id="map_canvas" style="width:600px; height:400px"></div>

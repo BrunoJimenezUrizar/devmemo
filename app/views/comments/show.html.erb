@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @comment.user %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%= @comment.public %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @comment.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_complaint_comment_path(@comment.complaint, @comment) %> |
+<%= link_to 'Back', complaint_comments_path(@comment.complaint) %>

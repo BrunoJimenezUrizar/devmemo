@@ -1,0 +1,33 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.m_user{
+	background: #FFF;
+	height: 150px;
+	border:solid;
+
+}
+
+.m_user_num{
+	color:green;
+	text-align: center;
+	font-weight: bolder;
+	font-size: 450%;
+	padding: 20%;
+}
+
+select#university{
+	width: 30%;
+}
+
+.mu_date{
+	float: left;
+
+}
+
+#mu_text{
+	margin-top: 20px;
+	padding-bottom: 5px;
+}

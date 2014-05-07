@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="well well-large span5 offset1">
+	<h2>
+	  Encuestas
+	  <% if can_administer? %>
+	    <%= link_to '<i class="icon-plus"></i>'.html_safe, new_question_group_path, :class => "btn", :class => 'btn', :data => {:toggle=>"modal", :target => '#modal-survey'}, remote: true %>
+	  <% end %>
+	</h2>
+	<hr/>
+
+	<table class="table table-striped">
+
+	  <thead>
+	    <tr>
+	      <th>Nombre</th>
+	      <th>Acciones</th>
+	      <th>Estado</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <%= render @university.question_groups %>
+	  </tbody>
+	</table>
+	</div>
+
+	<div class="well well-large span5 clearfix">
+	
+	<div id="questions" class="offset1">
+		<hr/>
+		<div class="row">
+			<div class="span7">
+				<h2>
+					<%= @question_group.name %>
+				</h2>
+			</div>
+			
+			<div class="span2">
+				<% if @question_group.active? %>
+	      			<%= link_to 'Desactivar', deactivate_path(@question_group),:title => "Desactivar Encuesta", :class => 'btn btn-large btn-danger' %>
+	   			 <% else %>
+	      			<%= link_to 'Activar', activate_path(@question_group),:title => "Activar Encuesta", :class => 'btn btn-large btn-primary' %>
+	    		<% end %>
+			</div>
+		</div>
+
+		<div class="row">
+			<ul>
+				<% @question_group.campuses.each do |campus| %>
+					<li><%= campus.name %></li>
+				<% end %>
+			</ul>
+		</div>
+		<hr/>
+	
+
+	<h3>
+	  Preguntas
+	  <%= link_to '<i class="icon-plus"></i>'.html_safe, rapidfire.new_question_group_question_path(@question_group), :class => 'btn', :data => {:toggle=>"modal", :target => '#modal-question'},:title => "Nueva Pregunta", remote: true %>
+	  <%= link_to '<i class="icon-chevron-right"></i>'.html_safe, rapidfire.new_question_group_answer_group_path(@question_group), :class => 'btn',:id => 'questions_details',:title => "Ver Preguntas", remote: true %>
+	</h3>
+	<hr/>
+
+	  </div>
+
+	</div>
+</div>

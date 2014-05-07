@@ -1,0 +1,46 @@
+
+		<hr/>
+		<div class="row">
+			<div class="span7">
+				<h2>
+					<%= @question_group.name %>
+				</h2>
+			</div>
+			<div class="span2">
+				<% if @question_group.active? %>
+	      			<%= link_to 'Desactivar', deactivate_path(@question_group), :class => 'btn btn-large btn-danger' %>
+	   			 <% else %>
+	      			<%= link_to 'Activar', activate_path(@question_group), :class => 'btn btn-large btn-primary' %>
+	    		<% end %>
+			</div>
+		</div>
+
+		<div class="row">
+			<ul>
+				<% @question_group.campuses.each do |campus| %>
+					<li><%= campus.name %></li>
+				<% end %>
+			</ul>
+		</div>
+		<hr/>
+		<% if @question_group.photo? %>
+			<%= image_tag @question_group.photo.url(:medium) %>
+		<% end %>
+	
+
+	<h3>
+	  Preguntas
+	  <%= link_to '<i class="icon-plus"></i>'.html_safe, rapidfire.new_question_group_question_path(@question_group), :class => 'btn', :data => {:toggle=>"modal", :target => '#modal-question'}, :title => 'Nueva Pregunta', remote: true %>
+	  <%= link_to '<i class="icon-chevron-down"></i>'.html_safe, rapidfire.new_question_group_answer_group_path(@question_group), :class => 'btn hidden', remote: true %>
+	</h3>
+	<hr/>
+
+	<%= form_for([@question_group, @answer_group_builder]) do |f| %>
+<ul>
+  <%- @answer_group_builder.answers.each do |answer| %>
+    <%= f.fields_for("#{answer.question.id}", answer) do |answer_form| %>
+      <%= render_answer_form_helper(answer, answer_form) %>
+    <% end %>
+  <% end %>
+</ul>
+<% end %>

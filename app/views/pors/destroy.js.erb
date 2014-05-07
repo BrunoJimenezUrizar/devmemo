@@ -1,0 +1,23 @@
+// Variables que usaremos para eliminar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = "<%= @por.id %>";											// id del punto a eliminar
+
+// Eliminamos el registro del listado de pors:
+$('#edit_por_' + id).parent().parent().remove();
+
+// Quitamos el marcador del mapa del campus:
+campusMap.deleteMarker(id, MapWrapper.MarkerType.POR_MARKER);
+
+// Redefinimos función loadPors para quitar el punto eliminado:
+function loadPors(mapWrapperInstance){
+  //agrega marcadores de puntos de reciclaje.
+  <% @pors.each do |por| %>
+    var id = <%= por.id %>;											// id del punto a cargar
+    var latitude = <%= por.latitude %>;	        // Latitud del punto a cargar
+    var longitude = <%= por.longitude %>;       // Longitud del punto a cargar
+    var description = '<p><b>Descripción:</b><%= por.name %></p><b>Basureros:</b><ul><%por.dumps.each do |dump|%><li><%=dump.type.name%></li><%end%></ul>';
+
+    // Cargamos el marcador en el mapa correspondiente:
+    mapWrapperInstance.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.POR_MARKER); 
+  <% end %>
+}

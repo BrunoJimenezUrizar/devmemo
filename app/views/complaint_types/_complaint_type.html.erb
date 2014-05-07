@@ -1,0 +1,9 @@
+<div id="edit_complaint_type_<%= complaint_type.id %>">
+<i class="icon-flag"></i> <%= complaint_type.name %>
+<% if controller.controller_name == 'complaint_types' %>
+	<% if !complaint_type.first? %>
+		<%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_university_complaint_type_path(complaint_type.university, complaint_type), :data => {:toggle=>"modal", :target => '#modal-type'}, remote: true %>
+		<%= link_to '<i class="icon-remove"></i>'.html_safe, [complaint_type.university, complaint_type], :confirm => '¿Estás seguro que deseas eliminar este tipo de denuncia? Al eliminar un tipo de denuncia se reasignarán a Otros todas las denuncias asociadas', :method => :delete, remote: true %>
+		<% end %><br>
+<% end %>
+</div>

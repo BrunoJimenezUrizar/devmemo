@@ -1,0 +1,23 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+.purr {
+  position: fixed;
+  top: 30px;
+  right: 100px;
+  width: 250px;
+  padding: 20px;
+  background-color: #FCC;
+  border: solid 2px #C66;
+  &:first-letter { text-transform: uppercase; }
+}
+
+div.map_complaint{
+  padding: 20px;
+  background: rgb(196, 202, 207);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}

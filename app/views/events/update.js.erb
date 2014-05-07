@@ -1,0 +1,13 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = <%= @event.id %>;																	// id del punto a cargar
+var latitude = <%= @event.latitude %>;											// Latitud del punto a cargar
+var longitude = <%= @event.longitude %>;										// Longitud del punto a cargar
+var description = "<%= @event.description %>";							// Descripción del punto de interés
+
+// Oculatamos el modal y cargamos el html del punto en el listado de events:
+$('#modal-event').modal('hide');
+$('#edit_event_<%= @event.id %>').parent().parent().replaceWith('<%= j render(@event) %>');
+
+// Cargamos el punto en el mapa del campus, indicando que corresponde a un event:
+campusMap.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER);

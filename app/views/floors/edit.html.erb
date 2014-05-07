@@ -1,0 +1,6 @@
+<h1>Editing floor</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', [@university, @campus, @floor.building, @floor] %> |
+<%= link_to 'Back', university_campus_building_floors_path(@university, @campus, @floor.building) %>

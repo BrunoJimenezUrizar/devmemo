@@ -1,0 +1,60 @@
+<!--%=simple_form_for(@advertise) , do |f|%-->
+  <!--<span></span>%= f.error_notification %-->
+
+<%= simple_form_for @advertise, :validate => true, :html => { :multipart => true } do |f| %>
+  <% if @advertise.errors.any? %>
+    <div id="error_explanation">
+      <%if @advertise.errors.count<=1%>
+        <h2><%= pluralize(@advertise.errors.count, "error") %> impidió que esta publicidad sea guardada:</h2>
+      <%else%>
+        <h2><%= pluralize(@advertise.errors.count, "errores") %> impidieron que esta publicidad sea guardada:</h2>
+      <%end%>
+      <ul>
+      <% @advertise.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="offset2 span4">
+      <div class="well well-large clearfix">
+        <div class="field">
+          <%=f.label :image_advertise%>
+          <div>
+          <%= f.file_field :image_advertise, :accept => 'image/png,image/gif,image/jpeg'%>
+          </div>
+        </div>
+        <div class="field">
+          <%= f.input :name%>
+        </div>
+        <div class="field">
+          <%= f.input :link%>
+        </div>
+        <div class="field">
+          <%= f.input :start_date ,:as => :datetime_picker %>
+        </div>
+        <div class="field">
+          <%= f.input :end_date, :as => :datetime_picker, :label=> "Fecha de término" %>
+        </div>
+        <div class="field">
+          Activa:<%=f.check_box :active%>  
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, :class => 'btn btn-medium btn-primary btn' %>
+        </div>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="well well-large span8 clearfix">
+        <h4> Campuses:</h4>
+        <div class="barra"></div>
+        <div class="accordion" id="accordion_university"> <!-- Acordeon que trae bootstrap -->
+          <div id="universities">
+            <%= render 'universities' %> <!-- Lista de puntos de interes, se renderea cada uno de los pois/_poi.html.erb-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

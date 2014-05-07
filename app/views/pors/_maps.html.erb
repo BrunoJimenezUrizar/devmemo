@@ -1,0 +1,73 @@
+<script type="text/javascript">
+   
+    function initialize() {
+     
+        var markers=[]
+
+        //crea mapa centrado en campus San Joaquin
+        var map = new google.maps.Map(document.getElementById("map_canvas3"),{
+            center: new google.maps.LatLng(-33.498172636004796,-70.61200618743896),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+
+        //pone marcadores anteriores
+        <%if @action=="new"%>
+            <% @campus.pors.each do |por| %>
+                <% if por.name%>
+                    var mark = new google.maps.Marker({
+                    position : new google.maps.LatLng(<%=por.latitude%>, <%=por.longitude%>),
+                    map : map,
+                    title: "<%=por.name%>",
+                    icon:{url:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    scaledSize:new google.maps.Size(42, 46)}
+                    });
+                <%end%>
+            <% end %>
+        <%end%>
+
+        //evento, al hacer click pone un marcador en el lugar
+        google.maps.event.addListener(map, "click", function(evento) {
+     
+            var latitude = evento.latLng.lat();
+            var longitude = evento.latLng.lng();
+
+            document.getElementById("por_latitude").value=latitude;
+            document.getElementById("por_longitude").value=longitude;
+     
+            var coords = new google.maps.LatLng(latitude, longitude); 
+            var marker = new google.maps.Marker({
+                position: coords,
+                map: map, 
+                animation: google.maps.Animation.DROP,
+                icon:{url:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                scaledSize:new google.maps.Size(42, 46)}
+                });
+
+            var num_markers=markers.push(marker);
+
+            //elimina marcadores anteriores.
+            for (var i=0;i<num_markers-1;i++){
+                markers[i].setMap(null);
+            }
+        }); 
+        //pone marcador existente al editar.
+        <%if @action=="edit"%>
+            var marker = new google.maps.Marker({
+                position : new google.maps.LatLng(<%=@por.latitude%>, <%=@por.longitude%>),
+                map : map,
+                title: "<%=@por.name%>",
+                icon:{url:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                scaledSize:new google.maps.Size(42, 46)}
+                });
+            markers.push(marker);
+        <%end%>
+ 
+    }
+    //inicializa el mapa al cargar el modal.
+    $('#modal-por').on('shown', function(){
+        initialize();
+        $(".close").popover();
+    });
+</script>
+ 

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @poi.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @poi.description %>
+</p>
+
+<b>Categories:</b>
+<ul>
+  <% @poi.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_university_campus_poi_path(@university, @poi.campus, @poi) %> |
+<%= link_to 'Back', university_campus_pois_path(@university, @poi.campus) %>
+
+<%= render 'maps' %>
+
+<div id="map_canvas"></div>

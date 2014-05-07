@@ -1,0 +1,36 @@
+[
+<% @points.each_with_index do |point, index| %>
+  {
+    "<%= @point_name %>": {
+      "id":<%=point.id %>,
+      "campus_id":<%=point.campus.id %>,
+      <% if point.respond_to?('name') %>
+      "name":"<%= point.name%>",
+      <% end %>
+      "description":"<%=point.description%>",
+      <% if point.respond_to?('location') %>
+	    "location":"<%= point.location%>",
+      <% end %>
+      <% if point.respond_to?('categories')%>
+      "categories":[
+      	<% point.categories.each_with_index do |category, c_index| %>
+        {
+          "id":<%=category.id%>, "name":"<%=category.name%>", "description":"<%=category.description%>"
+        <% if(c_index != point.categories.count-1) %>
+        },
+        <% else %>
+        }
+        <% end %>
+      	<% end %>
+      ],
+      <% end %>
+      "latitude":<%= point.latitude%>,
+      "longitude":<%= point.longitude%>
+    }
+	<% if(index != @points.count-1) %>
+  },
+  <% else %>
+  }
+  <% end %>
+<% end %>
+]

@@ -1,0 +1,6 @@
+<h1>Editing building</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', [@building.campus.university, @building.campus, @building] %> |
+<%= link_to 'Back', university_campus_buildings_path(@building.campus.university, @building.campus) %>

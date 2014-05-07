@@ -1,0 +1,30 @@
+<%= form_for([@university, @complaint.campus, @complaint]) do |f| %>
+  <% if @complaint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@complaint.errors.count, "error") %> prohibited this complaint from being saved:</h2>
+
+      <ul>
+      <% @complaint.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.select :status, options_for_select([["En Proceso", "En Proceso"], ["Vista","Vista"], ["Solucionada", "Solucionada"]]) %>
+  </div>
+  <div class="field">
+    <%= f.label :complaint_type_id %><br />
+    <%= collection_select(:complaint, :complaint_type_id, @university.complaint_types, :id, :name, :prompt => false) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+ <div class="well span5 offset3">
+    <h1><%= @university.name %></h1>
+
+<!-- LISTA DE LOS ADMINISTRADORES DE ESTA UNIVERSIDAD -->
+	<h3>Administradores:</h3>
+	<% admins = [] %>
+	<% User.all.each do |user| %>
+		<% universities = University.with_role(:university_admin, user).map(&:id) %>
+		<% if universities.include?(@university.id) %>
+			<div> <%= user.email %>
+				<%= link_to '<i class="icon-remove icon-white"></i>'.html_safe, university_admin_remove_path(:user_id => user.id, :university_id => @university.id), :class => 'btn btn-mini delete_btn form_btn', :title => "Quitar" %>
+			</div>
+			<% admins << user%>
+		<% end %>
+	<% end %>
+	<% if admins == [] %>
+		<div>No hay administradores de esta universidad.</div>
+	<% end %>
+	<% admins = admins + User.with_role(:super_admin) %>
+
+	<div class="barra"></div>
+	<% if (User.all - admins).count > 0 %>
+	    <%= form_tag({ :controller => "users", :action => "university_admin_create"}, :class=>"form-inline") do %>
+	      <%= select_tag "user", options_from_collection_for_select(User.all - admins, "id", "email"), :id => "select_admin_university" %>
+	      <%= hidden_field_tag :university_id, @university.id %>
+	      <%= submit_tag "Agregar", :class => "btn" %>
+	    <% end %>
+	<% else %>
+		<h4>No hay usuarios para agregar.</h4>
+	<% end %>
+  </div>
+

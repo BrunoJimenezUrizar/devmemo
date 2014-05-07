@@ -1,0 +1,6 @@
+// Variables que usaremos para eliminar el edificio:
+// -----------------------------------------------------------------------------------------
+var id = "<%= @campus.id %>";									// id del edificio a cargar
+
+// Eliminamos el registro del listado de campuses:
+$('div#campus_' + id).remove();

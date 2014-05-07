@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString_one
+  #center_coordinates: MyString
+  acronym: acronym_one
+  id: 1
+
+two:
+  name: MyString_two
+  #center_coordinates: MyString
+  acronym: acronym_two
+  id: 2

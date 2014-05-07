@@ -1,0 +1,29 @@
+<h1><%= link_to @building.name, [@university, @campus, @building] %></h1>
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Indoor path</th>
+    <th>Description</th>
+    <th>Building</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @floors.each do |floor| %>
+  <tr>
+    <td><%= floor.number %></td>
+    <td><%= floor.indoor_path %></td>
+    <td><%= floor.description %></td>
+    <td><%= floor.building_id %></td>
+    <td><%= link_to 'Show', [floor.building.campus.university, floor.building.campus, floor.building, floor] %></td>
+    <td><%= link_to 'Edit', edit_university_campus_building_floor_path(floor.building.campus.university, floor.building.campus, floor.building, floor) %></td>
+    <td><%= link_to 'Destroy', [floor.building.campus.university, floor.building.campus, floor.building, floor], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Floor', new_university_campus_building_floor_path(params[:building_id]) %>

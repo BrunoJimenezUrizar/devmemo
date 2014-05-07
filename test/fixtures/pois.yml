@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  campus_id: 1
+  coordinates: POINT (-70.61583638191223 -33.49882590270631)
+
+two:
+  name: MyString
+  description: MyText
+  campus_id: 1
+  coordinates: POINT (-70.61583638191223 -33.49882590270631)

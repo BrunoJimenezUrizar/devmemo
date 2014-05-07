@@ -1,0 +1,27 @@
+<h1>Lista de niveles</h1>
+
+<table>
+  <tr>
+    <th>Imagen</th>
+    <th>Nombre del Nivel</th>
+    <th>Puntaje</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @levels.each do |level| %>
+  <tr>
+    <td><%= image_tag level.image.url(:thumb)%> </td>
+    <td><%= level.name %></td>
+    <td><%= level.points %></td>
+    <td><%= link_to 'Mostrar', level %></td>
+    <td><%= link_to t('.edit', :default => t("helpers.links.edit")), edit_level_path(level) %></td>
+    <td><%= link_to t('.destroy', :default => t("helpers.links.destroy")), level, method: :delete, data: { confirm: t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo Nivel', new_level_path %>

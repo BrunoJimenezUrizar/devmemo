@@ -1,0 +1,19 @@
+[
+<% @buildings.each do |building, index| %>
+ {
+  "building": {
+   "id": <%= building.id %>,
+   "name": "<%= building.name %>",
+   "polygon": "<%= building.encoded_polygon %>",
+   "center_coordinates": [ <% center= building.center_coordinates %>
+     "lat":"<%= center.y %>",      
+     "lng":"<%= center.x %>",
+   ]
+  }
+ <% if(index != @buildings.count-1) %>
+ },
+ <% else %>
+ }
+ <% end %>
+<% end %>
+]

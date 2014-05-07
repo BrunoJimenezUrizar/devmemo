@@ -1,0 +1,8 @@
+<div class="well span5 offset3">
+	<h1>Administracion de Categorias</h1>
+	<div class="barra"></div>
+	<div class="categories" id="categories">
+	  <%= render @categories %>
+	</div>
+	<%= link_to '<i class="icon-plus"></i>'.html_safe, new_university_category_path(@university), :class => "btn float_right", :data => {:toggle=>"modal", :target => '#modal-category'}, :title => "Nueva Categoria" ,remote: true %> 
+</div>

@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Generar QR</h3>
+</div>
+<div class="modal-body">
+	<p id="notice"><%= notice %></p>
+
+	<row>
+	<div class="span6">
+	<h4><%=@por.name %></h4>
+
+	<h5>Basurero de <%=@dump.type.name %></h5>
+
+  	<%=form_tag(:controller=> "dumps", :action=> "download", :dump_id => @dump.id) do%>
+	  	<%= field_set_tag do %>
+	  		<%= label_tag "Ancho" %>
+	  		<%= text_field_tag 'width', '400' %>
+	  		<%= label_tag "Alto" %>
+		  	<%= text_field_tag 'height', '400' %>
+		<% end %> 
+	  	<button class="btn">Descargar</button>
+  	<%end%>
+  	</div>
+  	<div class="span6"><%= image_tag @url%></div>
+  	</row>
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+</div>

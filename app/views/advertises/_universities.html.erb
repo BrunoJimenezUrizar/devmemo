@@ -1,0 +1,19 @@
+<%for university in University.all%>
+  <div class="accordion-group" id="accordion-border-style">
+    <div class="accordion-heading">
+      <a class="accordion-toggle collapsed" id="edit_university_<%= university.id %>" data-toggle="collapse" data-parent="#accordion_university" href="#collapse_university<%= university.id %>">
+        <%= university.name %>
+      </a>
+    </div>
+    <div id="collapse_university<%= university.id %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <%university.campuses.each do |campus|%>
+          <div>
+            <%=check_box_tag :campus_ids, campus.id,@advertise.campuses.include?(campus),:name => "advertise[campus_ids][]" -%>
+            <%=campus.name%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<%end%> 

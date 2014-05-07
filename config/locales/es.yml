@@ -1,0 +1,226 @@
+es:
+  titles:
+    sessions: 
+      new: "Inicio de sesión"
+  activerecord:
+    models:
+      level: "Nivel"
+      advertise: "Publicidad"
+    attributes:
+      survey:
+        name: "Nombre"
+      advertise:  
+        image_advertise: "Imagen de la publicidad"
+        start_date: "Fecha de inicio"
+        end_date: "Fecha de termino"
+        active: "¿Esta activa?"
+        link: "Link"
+        image_advertise_file_name: "Archivo"
+        image_advertise_content_type: "Tipo de imagen"
+        image_advertise_file_size: "Tamaño de la imagen"
+        name: "Nombre de la publicidad"
+        campuses: "Campuses"
+      report:
+        image_report: "Imagen de la noticia"
+        start_date: "Fecha de inicio"
+        end_date: "Fecha de termino"
+        active: "¿Está activa?"
+        link: "Link"
+        image_report_file_name: "Archivo"
+        image_report_content_type: "Tipo de imagen"
+        image_report_file_size: "Tamaño de la imagen"
+        name: "Nombre de la noticia"
+        campuses: "Campuses"
+      user:
+        name: "Nombre"
+        created_at: "Día registro"
+        password: "Contraseña"
+        roles: "Rol"
+        email: "Correo electrónico"
+        password_confirmation: "Confirmación de Contraseña"
+        reset_password_token: "Token para resetear contraseña"
+      level:
+        name: "Nombre"
+        points: "Puntos"
+        image: "Imagen"
+    alerts:
+      advertise:
+        created: "La publicidad fue creada con éxito"
+        updated: "La publicidad fue actualizada"
+      building:
+        created: "El edificio fue creado con éxito"
+        updated: "El edificio fue actualizado"
+      campus:
+        created: "El campus fue creado con éxito"
+        updated: "El campus fue actualizado"
+      floor:
+        created: "El piso fue creado con éxito"
+        updated: "El piso fue actualizado"
+      level:
+        created: "El nivel fue creado con éxito"
+        updated: "El nivel fue actualizado"
+    errors:
+      template:
+        header:
+          one: "1 error evitó la creación del %{model}"
+          other: "%{count} errores evitaron la creación del %{model}"
+        body: "Hubo problemas con los siguientes campos:"
+      models:
+        campus:
+          attributes:
+            address: 
+              blank: "La dirección no puede ser ingresada en blanco"
+            name:
+              blank: "Nombre del campus no puede estar en blanco"
+              taken: "El nombre de este campus ya está utilizado"
+        university:
+          attributes:
+            name:
+              blank: "Nombre de la universidad no puede estar en blanco"
+              taken: "El nombre de esta universidad ya está utilizado"
+            acronym:
+              blank: "Sigla no puede  estar en blanco"
+            logo_content_type:
+              invalid: "El archivo no corresponde a un formato de imagen soportado (elija jpg o png)"
+            logo:
+              blank: "No se ha adjuntado un logo a la universidad"
+        building:
+          attributes:
+            name:
+              blank: "Nombre del edificio no puede estar en blanco"
+              taken: "Ya existe un edificio con este nombre"
+            polygon:
+              blank: "Tienes que asignar un poligono en el mapa"
+        floor:
+          attributes:
+            number:
+              blank: "Debes ingresar un numero de planta"
+              taken: "No pueden existir dos pisos con el mismo número"
+        por:
+          attributes:
+            description:
+              blank: "Descripción del punto de reciclaje no puede estar en blanco"
+              taken: "Ya existe otro punto de reciclaje con esta descripción"
+            name:
+              blank: "Nombre del Punto de reciclaje no puede estar en blanco"
+        poi:
+          attributes:
+            name:
+              blank: "Nombre del punto de interés no puede estar en blanco"
+              taken: "Ya existe un punto de interés con el mismo nombre"
+        event:
+          attributes:
+            name:
+              blank: "Nombre no puede estar en blanco"
+            start_date:
+              blank: "Fecha de inicio no puede estar en blanco"
+            end_date:
+              blank: "Fecha de termino no puede estar en blanco"
+            start_advertising:
+              blank: "Fecha de inicio de publicacion no puede estar en blanco"
+            end_advertising:
+              blank: "Fecha de termino de publicación no puede estar en blanco"
+            latitude:
+              blank: "No has ingresado la posición del evento en el mapa"
+        rapidfire/question:
+          attributes:
+            question_text:
+              blank: "No se ha escrito una pregunta para el texto"
+            answer_options:
+              blank: "El campo de opciones para la pregunta está en blanco"
+        rapidfire/question_group:
+          attributes:
+            name:
+              blank: "No se ha escrito un nombre para la encuesta  "
+        user:
+          attributes:
+            reset_password_token:
+              invalid: "El token es inválido"
+            email:
+              blank: "No se ha ingresado un correo electrónico"
+              taken: "Este correo electrónico ya esta registrado"
+            password:
+              confirmation: "La contraseña de confirmación es distinta"
+              blank: "No ha ingresado una contraseña"
+              too_short: "La contraseña ingresada es muy corta"
+            name:
+              blank: "No se ha ingresado un nombre"
+        advertise:
+          attributes:
+            name:
+              taken: "Existe una publicidad con el mismo nombre" 
+              blank: "No se ha ingresado un nombre para la publicidad"
+            image_advertise:
+              blank: "No se ha adjuntado una imagen para la publicidad"
+            start_date:
+              blank: "No se ha ingresado una fecha de inicio"
+            end_date:
+              blank: "No se ha ingresado una fecha de termino"
+            image_advertise_content_type:
+              invalid: "El archivo no corresponde a un formato de imagen soportado (elija jpg o png)"    
+        report:
+          attributes:
+            name:
+              taken: "Existe una noticia con el mismo nombre" 
+              blank: "No se ha ingresado un nombre para la noticia"
+            image_report:
+              blank: "No se ha adjuntado una imagen para la noticia"
+            start_date:
+              blank: "No se ha ingresado una fecha de inicio"
+            end_date:
+              blank: "No se ha ingresado una fecha de termino"  
+            image_report_content_type:
+              invalid: "El archivo no corresponde a un formato de imagen soportado (elija jpg o png)"
+        level:
+          attributes:
+            name:
+              taken: "Existe un nivel con el mismo nombre"
+            points:
+              taken: "Hay un nivel con el mismo puntaje"
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Confirmar cambios en %{model}"
+    actions:
+      edit_password_current_user_users: "Cambiar contraseña"
+      change_campus: "Cambiar campus"
+      change_role: "Cambiar rol"
+      destroy: "Borrar"
+      edit: "Editar"
+      edit_account: "Editar tu cuenta"
+      edit_campus: "Editar campus"
+      edit_building: "Editar edificio"
+      new: "Nueva"
+      new_user: "Nuevo usuario"
+      new_advertise: "Nueva publicidad"
+      new_campus: "Nuevo campus"
+      new_report: "Nueva noticia"
+      new_building: "Nuevo edificio"
+      sign_out: "Cerrar sesión"
+      title: "Acciones"
+    links:
+      back: "Volver"
+      cancel: "Cancelar"
+      confirm: "¿Estás seguro?"
+  time:
+    formats:
+      default: '%d/%m/%Y %H:%M'
+  messages:
+    report:
+      is_report_active_for_andriod?: "¿Se mostrará en Android?"
+      is_report_active: "Si"
+      isnt_report_active: "No se mostrará"
+    advertise:
+      is_advertise_active_for_android?: "¿Se mostrará en Android?"
+      is_advertise_active: "Sí."
+      isnt_advertise_active: "No se mostrará."
+    user:
+      log_in:
+        remember_me: "Recordarme"
+    general:
+      causes: "Causa(s):"
+      p_isnt_in_date_time_range: "la fecha actual no pertenece al rango de publicación"
+      p_isnt_active: "la publicación no esta activa"
+    administration:
+      not_authorized: "No tienes privilegio de administración"
+

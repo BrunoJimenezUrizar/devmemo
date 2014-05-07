@@ -1,0 +1,4 @@
+  <%= f.fields_for :type do |type| %>
+  	<%= f.collection_select(:type_id, Type.all, :id, 'name', :include_blank => false) %>
+   <% end %>
+   <%= f.link_to_remove "Eliminar" %>

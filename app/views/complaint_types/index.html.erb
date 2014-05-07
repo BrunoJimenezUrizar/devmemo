@@ -1,0 +1,12 @@
+<div class="well well-large span5 offset3">
+<h1>Administracion de Tipos</h1>
+<div class="barra"></div>
+
+<div id="types" class="types">
+  <%= render @complaint_types %>
+</div>
+
+
+<br />
+<%= link_to '<i class="icon-plus"></i>'.html_safe, new_university_complaint_type_path(@university), :class => "btn float_right", :data => {:toggle=>"modal", :target => '#modal-type'}, :title => "Nuevo Tipo", remote: true %> 
+</div>

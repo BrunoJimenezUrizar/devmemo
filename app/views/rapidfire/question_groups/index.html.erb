@@ -1,0 +1,31 @@
+<div class="well well-large span5 offset1">
+<h2>
+  Encuestas
+  <% if can_administer? %>
+    <%= link_to '<i class="icon-plus"></i>'.html_safe, new_question_group_path, :class => "btn", :class => 'btn', :data => {:toggle=>"modal", :target => '#modal-survey'}, :title => "Nueva Encuesta", remote: true %>
+  <% end %>
+</h2>
+<hr/>
+
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @question_groups.count == 0 %>
+      <tr>
+        <td id="empty_table" colspan="2">
+          <h3>¡Aún no has agregado ninguna encuesta!</h3>
+          <span>Para agregar una, haz <%= link_to "click aquí", new_question_group_path, :data => {:toggle=>"modal", :target => '#modal-survey'}, remote: true %>
+           </span>
+        </td>
+      </tr>
+    <% end %>
+    <%= render partial: "question_group", collection: @question_groups %>
+  </tbody>
+</table>
+</div>

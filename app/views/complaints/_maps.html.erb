@@ -1,0 +1,23 @@
+<script type="text/javascript">
+
+
+  function initialize() {
+
+    var map = new google.maps.Map(document.getElementById("complaint_show"),{
+            center: new google.maps.LatLng(<%= @complaint.latitude%>, <%= @complaint.longitude%>),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+
+   var mark = new google.maps.Marker({
+                    position : new google.maps.LatLng(<%= @complaint.latitude%>, <%= @complaint.longitude%>),
+                    map : map
+                    });  
+  }
+  
+  //inicializa el mapa al cargar la página.
+  google.maps.event.addDomListener(window, 'load', function(){
+    initialize();});
+                      
+	  
+</script>

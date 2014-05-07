@@ -1,0 +1,53 @@
+<div class="row offset1">
+  <div class="well well-large span6 clearfix">
+    <h2>
+      Denuncias
+        <%= link_to '<i class="icon-plus"></i>'.html_safe, new_university_campus_complaint_path(@university, @campus), :class => "btn", :class => 'btn', :title => "Nueva Denuncia" %>
+        <%= link_to '<i class="icon-pencil"></i>'.html_safe, university_complaint_types_path(@university), :class => "btn", :title => "Administrar tipos de denuncias" %>
+    </h2>
+    <hr/>
+
+    <% if @complaints.count == 0 %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Descripcion</th>
+            <th>Estado</th>
+            <th>Tipo</th>
+            <!--<th>Campus</th>
+            <th>Usuario</th>-->
+            <th></th>
+          </tr>
+        </thead>
+
+      <tbody>
+        <tr>
+          <td id="empty_table" colspan="6">
+            <h3>¡Aún no hay denuncias para este campus!</h3>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+   <% else %>
+
+    <table id="complaints" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Descripcion</th>
+          <th>Estado</th>
+          <th>Tipo</th>
+          <!--<th>Campus</th>
+          <th>Usuario</th>-->
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= render @complaints %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>

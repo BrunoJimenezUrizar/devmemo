@@ -1,0 +1,74 @@
+<!-- NIVEL 0: NO HAY PARAMETROS EN LA RUTA -->
+<% if user_signed_in?%>
+
+<li><%= link_to "Universidades", main_app.universities_url %></li>
+
+<!-- NIVEL 1: UNIVERSIDAD: LINKS QUE NECESITAN EL PARAMETRO UNIVERSIDAD -->
+<% if controller.controller_name == 'campuses' || controller.controller_name == 'complaints' || controller.controller_name == 'question_groups' || controller.controller_name == 'questions'|| controller.controller_name == 'answer_groups' || controller.controller_name == 'reports' || controller.controller_name == 'statistics' || controller.controller_name == 'categories' || controller.controller_name == 'types' %>
+  <!-- LINKS: CAMPUSES -->
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @university.acronym %> <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <% @university.campuses.each do |campus| %>
+        <% @class = "" %>
+        <% if controller.controller_name == 'campuses' %>
+          <% if campus.id == @campus.id %>
+            <% @class = "active" %>
+          <% else @class = "" %>
+          <% end %>
+        <% end %>
+        <li class="<%= @class %>"><%= link_to campus.name, main_app.university_campus_path(@university, campus) %></li>
+      <%end%>
+    </ul>
+  </li>
+  <!-- CAMPUSES:FIN -->
+
+  <!-- LINKS:ENCUESTAS -->
+  <li><a href="/universities/<%= @university.id %>/surveys">Encuestas</a></li>
+  <!-- ENCUESTAS:FIN -->
+
+  <!-- LINKS A NOTICIAS-->
+  <% if current_user.has_role? :super_admin or University.with_role(:university_admin, current_user).map(&:id).include?(@university.id) or Campus.with_role(:campus_admin, current_user).map(&:university_id).include?(@university.id) %>
+    <li><%= link_to "Noticias", main_app.university_reports_path(@university) %></li>
+  <% end %>
+  <!-- NOTICIAS:FIN -->
+
+  <!-- LINKS: ESTADISTICAS -->
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Estadisticas <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li><%= link_to 'Reciclaje', main_app.university_statistics_show_path(@university)%></li>
+      <li><%= link_to 'Eventos', main_app.university_statistics_events_path(@university)%></li>
+    </ul>
+  </li>
+  <!-- ESTADISTICAS:FIN -->
+
+  <!-- NIVEL 2: CAMPUS: LINKS QUE NECESITAN EL PARAMETRO CAMPUS -->
+  <% if controller.controller_name == 'campuses' || controller.controller_name == 'complaints' %>
+    <!-- LINKS: DENUNCIAS-->
+    <li><%= link_to "Denuncias", university_campus_complaints_path(@university, @campus) %></li>
+    <!-- DENUNCIAS:FIN-->
+  <% end %>  
+  <!-- NIVEL 2:FIN -->
+
+<% end %>
+<!-- NIVEL 1:FIN -->
+
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <% if current_user.has_role? :super_admin %>
+        <li><a href="/advertises">Publicidad</a></li>
+        <li><a href="/levels">Juego</a></li>
+      <% end %>
+      <li><a href="/users">Usuarios Web</a></li>
+      <li><a href="/mobile_users">Usuarios Móviles</a></li>
+    </ul>
+  </li>
+
+<% end %>
+<!-- NIVEL 0:FIN -->
+
+
+
+

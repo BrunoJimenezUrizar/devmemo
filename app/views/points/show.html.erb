@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class = "span3">
+    <p>
+      <b>Nombre:</b>
+      <%= @point.name %>
+    </p>
+
+    <p>
+      <b>Descripción:</b>
+      <%= @point.description %>
+    </p>
+
+    <p>
+      <b>Latitud:</b>
+      <%= @point.latitude %>
+    </p>
+
+    <p>
+      <b>Longitud:</b>
+      <%= @point.longitude %>
+    </p>
+
+    <p>
+      <b>Tipo:</b>
+      <%= @point.type.name %>
+    </p>
+
+    <%= link_to 'Editar', edit_point_path(@point) %> |
+    <%= link_to 'Volver', points_path %>
+    </br>
+    </br>
+    <%= button_to("Generar QR", {:action => 'generate_qr', :id => @point.id}) %>
+    </br>
+  </div>
+     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <style type="text/css">
+          html { height: 100% }
+          body { height: 100%; margin: 0; padding: 0 }
+          #map_canvas { height: 100% }
+        </style>
+        <script type="text/javascript"
+          src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB3CZwdEZQ4pVYPJ6Xf4e0ZJ_zn0ZpN9cU&sensor=false">
+        </script>
+        <script type="text/javascript">
+          function initialize() {
+            
+            var mapOptions = {
+              center: new google.maps.LatLng(<%=@point.latitude%>, <%=@point.longitude%>),
+              zoom: 18,
+              mapTypeId: google.maps.MapTypeId.SATELLITE
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),
+                mapOptions);
+            
+           
+            var marcador = new google.maps.Marker({
+                position : new google.maps.LatLng(<%=@point.latitude%>, <%=@point.longitude%>),
+                map : map,
+                title: "<%=@point.name%>"
+            });
+            
+          }
+          google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    <div class="span9" id="map_canvas" style="width:600px; height:400px"></div>
+  </div>

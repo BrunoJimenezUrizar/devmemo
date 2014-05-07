@@ -1,0 +1,29 @@
+<h1>Listing dumps</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Qr code</th>
+    <th>Type</th>
+    <th>Por</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @dumps.each do |dump| %>
+  <tr>
+    <td><%= dump.description %></td>
+    <td><%= dump.qr_code %></td>
+    <td><%= dump.type_id %></td>
+    <td><%= dump.por_id %></td>
+    <td><%= link_to 'Show', dump %></td>
+    <td><%= link_to 'Edit', edit_dump_path(dump) %></td>
+    <td><%= link_to 'Destroy', dump, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Dump', new_dump_path %>

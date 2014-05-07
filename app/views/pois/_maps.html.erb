@@ -1,0 +1,73 @@
+<script type="text/javascript">
+   
+
+    function initialize() {
+     
+        var markers=[];
+    
+        //crea mapa centrado en campus San joaquin
+        var map = new google.maps.Map(document.getElementById("map_canvas2"),{
+            center: new google.maps.LatLng(-33.498172636004796,-70.61200618743896),
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+            });
+
+        //pone marcadores existentes
+        <%if @action=="new"%>
+            <% @campus.pois.each do |poi| %>
+                <% if poi.name %>
+                    var mark = new google.maps.Marker({
+                    position : new google.maps.LatLng(<%=poi.latitude%>, <%=poi.longitude%>),
+                    map : map,
+                    title: "<%=poi.name%>"
+                    });  
+                <%end%>
+            <% end %>
+        <%end%>
+        
+        //evento, al hacer click pone un marcador en el lugar
+        google.maps.event.addListener(map, "click", function(evento) {
+     
+            var latitude = evento.latLng.lat();
+            var longitude = evento.latLng.lng();
+
+            document.getElementById("poi_latitude").value=latitude;
+            document.getElementById("poi_longitude").value=longitude;
+
+            var coords = new google.maps.LatLng(latitude, longitude); 
+            var marker = new google.maps.Marker({
+                position: coords,
+                map: map, 
+                animation: google.maps.Animation.DROP
+                });
+
+            var num_markers=markers.push(marker);
+
+            for (var i=0;i<num_markers-1;i++){
+                markers[i].setMap(null);
+            }
+        
+            
+        }); 
+
+        //pone el marcador anterior al editar.
+        <%if @action=="edit"%>
+            var marker = new google.maps.Marker({
+                position : new google.maps.LatLng(<%=@poi.latitude%>, <%=@poi.longitude%>),
+                map : map,
+                title: "<%=@poi.name%>"
+                });
+            markers.push(marker);
+        <%end%>
+  
+    }
+    //inicializa el mapa al mostrar el modal de poi.
+    $('#modal-poi').on('shown', function(){
+			initialize();
+			$("#poi_category_ids").select2();
+            $(".close").popover();
+
+    });
+
+</script>
+ 

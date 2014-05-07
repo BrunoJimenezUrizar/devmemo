@@ -1,0 +1,19 @@
+<%= div_for comment do %>
+	<div id="comment" class="clearfix">
+		<% if comment.user_id == current_user.id %>
+		<%= link_to '<i class="icon-remove"></i>'.html_safe, [@university, @campus, @complaint, comment], :confirm => '¿Estás seguro que deseas eliminar este comentario? Esta acción no se puede deshacer.', :method => :delete, :class => "float_right", remote: true %>
+		<% end %>
+		<%= comment.body %><br>
+
+		<div class="float_left">
+			<% if comment.public? %>
+				#<b>Público</b>
+			<% else %>
+				#<b>Interno</b>
+			<% end %>
+		</div>
+		<div id="commenter">
+			<b><%= comment.user.email %></b> <%= comment.created_at_local.strftime("%B %d, %H:%M") %>
+		</div>
+	</div>
+<% end %>

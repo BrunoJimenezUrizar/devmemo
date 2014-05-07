@@ -1,0 +1,52 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var campusPolygon = "<%=@campus.encoded_polygon %>";	// polígono del campus asociado
+
+// Cargamos contenido del modal
+$("#modal-poi").html('<%= j render("form") %>');
+
+<% if !@poi.errors.any? %>
+// Desactivamos el evento 'shown'
+$('#modal-poi').off('shown');
+// Lo volvemos a reactivar (hacemos esto para subscribirnos una única vez)
+$('#modal-poi').on('shown', function(){
+	// Inicializamos el mapa:
+	pointsMap = new MapWrapper('modal-poi');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+
+	// Inicializamos el select field:
+	$("#poi_category_ids").select2();
+});
+<% else %>
+	// Inicializamos el mapa:
+	pointsMap = new MapWrapper('modal-poi');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+
+	// Si había un marcador, lo redibujamos:
+	<% if !@poi.latitude.nil? && !@poi.longitude.nil? %>
+		var id = "new_point";														// id del punto a cargar
+		var latitude = <%= @poi.latitude %>;						// Latitud del punto a cargar
+		var longitude = <%= @poi.longitude %>;					// Longitud del punto a cargar
+		var description = "<%= @poi.description %>";		// Descripción del punto de interés
+
+		// Cargamos el punto en el mapa del campus, indicando que corresponde a un poi:
+		pointsMap.editMarker(id, latitude, longitude, description, MapWrapper.MarkerType.POI_MARKER);
+	<% end %>
+
+	// Inicializamos el select field:
+	$("#poi_category_ids").select2();
+<% end %>
+
+HelpInfo("Haz click en el mapa para seleccionar la ubicación del punto de interes");

@@ -1,0 +1,28 @@
+<h1>Listing pois</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Campus</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pois.each do |poi| %>
+  <tr>
+    <td><%= link_to poi.name, [@university, @campus, poi] %></td>
+    <td><%= poi.description %></td>
+    <td><%= poi.campus.name %></td>
+    <td><%= link_to 'Edit', edit_university_campus_poi_path(@university, poi.campus, poi) %></td>
+    <td><%= link_to 'Destroy', [@university, poi.campus, poi], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Poi', new_university_campus_poi_path(@university, @campus) %>
+<%= render 'maps' %>
+
+<div id="map_canvas"></div>

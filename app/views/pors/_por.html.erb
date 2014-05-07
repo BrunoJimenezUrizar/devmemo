@@ -1,0 +1,19 @@
+	<div class="accordion-group" id="accordion-border-style">
+    <div class="accordion-heading">
+      <a class="accordion-toggle collapsed" id="edit_por_<%= por.id %>" data-toggle="collapse" data-parent="#accordion2" href="#collapse_por_<%= por.id %>">
+        <%= por.name %>
+      </a>
+      <%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, [por.campus.university, por.campus, por], :class => 'btn btn-mini delete_btn float_right form_btn', :confirm => '¿Estás seguro que deseas eliminar este punto de reciclaje? Esta acción no se puede deshacer.', :method => :delete,:title => "Eliminar", remote: true %>
+			<%= link_to '<i class="icon-pencil icon-white"></i>'.html_safe, edit_university_campus_por_path(por.campus.university, por.campus, por), :class => "btn btn-mini edit_btn float_right form_btn", :data => {:toggle=>"modal", :target => '#modal-por'},:title => "Editar", remote: true %>
+
+    </div>
+    <div id="collapse_por_<%= por.id %>" class="accordion-body collapse">
+      <div class="accordion-inner">
+      <% if por.dumps[0] %>
+			<%= render por.dumps %>
+      <%else%>
+      <p>No tiene basureros</p>
+      <%end%>
+      </div>
+    </div>
+  </div>

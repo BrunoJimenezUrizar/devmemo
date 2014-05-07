@@ -1,0 +1,37 @@
+<h1>Usuarios móviles</h1>
+<div class= "well clearfix span10 offset1">
+<div id='chart' class= "span6 offset1 "></div>
+<%= render_chart @chart, 'chart' %>
+
+<div class="span2 m_user">
+  <h5 class="text-center">Resgistrados este mes</h5>
+  <p class="m_user_num"><%= @this_month_users%></p>
+</div>
+
+<div class="span2 m_user">
+  <h5 class="text-center">Resgistrados esta semana</h5>
+  <p class="m_user_num"><%= @this_week_users%></p>
+</div>
+
+</div>
+<div class="span10 offset1">
+
+<p id="mu_text" ><b>Selecciona fechas y universidad para ver información de los usuarios</b></p>	
+
+<%= form_tag mobile_users_path , :method=>"get",:id=>"mobile_user_form" do  %>
+ 
+
+ Universidad: <%= select_tag "university", options_from_collection_for_select(@universities, "id", "name", @university)%>
+<div class ="mu_date">
+ Desde: <%=text_field_tag  "from", @from,:type=>"date" %>
+ Hasta: <%=text_field_tag  "to", @to,:type=>"date" %>
+</div>
+ <%= submit_tag "Ir", :class=> "btn"%>
+
+<% end %>
+
+<%if @university%>
+<%= render 'table'%>
+<%end%>
+
+

@@ -1,0 +1,27 @@
+<h1>Listing comments</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Public</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comments.each do |comment| %>
+  <tr>
+    <td><%= comment.user %></td>
+    <td><%= comment.public %></td>
+    <td><%= comment.body %></td>
+    <td><%= link_to 'Show', [comment.complaint, comment] %></td>
+    <td><%= link_to 'Edit', edit_complaint_comment_path(comment.complaint, comment) %></td>
+    <td><%= link_to 'Destroy', [comment.complaint, comment], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Comment', new_complaint_comment_path(params[:complaint_id]) %>

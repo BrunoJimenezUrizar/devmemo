@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  qr_code: MyString
+  type_id: 1
+  por_id: 1
+  id: 1
+
+two:
+  description: MyString
+  qr_code: MyString
+  type_id: 1
+  por_id: 1
+  id: 2

@@ -1,0 +1,61 @@
+<%= simple_form_for [@university,@report], :html => { :multipart => true } do |f| %>
+  <% if @report.errors.any? %>
+    <div id="error_explanation">
+      <%if @report.errors.count<=1%>
+        <h2><%= pluralize(@report.errors.count, "error") %> impidió que esta noticia sea guardada:</h2>
+      <%else%>
+        <h2><%= pluralize(@report.errors.count, "errores") %> impidieron que esta noticia sea guardada:</h2>
+      <%end%>
+      <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="offset2 span4">
+      <div class="well well-large clearfix">
+        <!--div class="field"-->
+          <!--%=f.label :image_report%--><!--%= f.file_field :image_report, :accept => 'image/png,image/gif,image/jpeg'%-->
+        <!--/div-->
+        <div class="field">
+          <%=f.label :image_report%>
+          <%= f.file_field :image_report%>
+        </div>
+        <div class="field">
+          <%= f.input :name%>
+        </div>
+        <div class="field">
+          <%= f.input :link%>
+        </div>
+        <div class="field">
+          <%= f.input :start_date ,:as => :datetime_picker %>
+        </div>
+        <div class="field">
+          <%= f.input :end_date, :as => :datetime_picker, :label=> "Fecha de término" %>
+        </div>
+        <div class="field">
+          Activa:<%=f.check_box :active%>  
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, :class => 'btn btn-medium btn-primary btn' %>
+        </div>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="well well-large span8 clearfix">
+        <h4> Campuses:</h4>
+        <div class="barra"></div>
+        <%@university.campuses.each do |campus|%>
+          <%if @campuses.include?(campus)%>
+            <div>
+              <%=check_box_tag :campus_ids, campus.id,@report.campuses.include?(campus),:name => "report[campus_ids][]" -%>
+              <%=campus.name%>
+            </div>
+          <%end%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

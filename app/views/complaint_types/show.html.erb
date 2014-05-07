@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>University:</b>
+  <%= @complaint_type.university %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @complaint_type.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_university_complaint_type_path(@complaint_type.university, @complaint_type) %> |
+<%= link_to 'Back', university_complaint_types_path(@complaint_type.university) %>

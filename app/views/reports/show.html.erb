@@ -1,0 +1,67 @@
+<h1><%=@report.name%></h1>
+<div class="well clearfix">
+  <div class="span12">
+    <div class="offset2 span4">
+      <p>
+        <%= image_tag @report.image_report %>
+      </p>
+    </div>
+    <div class="span2">
+      <div class="well">
+          <b><%=label :start_date,t('activerecord.attributes.report.start_date'),:id=>'title'%></b>
+          <%=l @report.start_date %>
+      </div>
+    </div>
+    <div class="span2">
+      <div class="well">
+          <b><%=label :end_date,t('activerecord.attributes.report.end_date'), :id=>'title'%></b>
+          <%=l @report.end_date %>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well">
+        <p>
+          <b><%=label :campuses,t('activerecord.attributes.report.campuses'), :id=>'title'%></b>
+          <%if @report.campuses.count>0%>
+            <%= get_string_from_array(@report.campuses.pluck(:name)) %>
+          <%end%>
+        </p>
+        <p>
+          <b><%=label :link,t('activerecord.attributes.report.link'), :id=>'title'%></b>
+            <% if @report.link %>
+            <%= link_to @report.link%>
+            <%else%>
+            <%= "No hay disponible" %>
+            <%end%>
+        </p>
+      </div>
+    </div>
+    <div class="span4">
+      <!--Muestra estado de la publicidad-->
+      <div class="well">
+        <p>
+          <b><%=t('activerecord.attributes.report.active')%></b>
+          <%if @report.active %>
+            <%=t('messages.report.is_report_active')%>
+          <%else%>
+            <%=t('messages.report.isnt_report_active')%>
+          <%end%>
+        </p>
+        <p>
+          <b><%=t('messages.report.is_report_active_for_andriod?')%></b>
+          <%if not show_in_android?(@report) %>
+            <%=t('messages.report.isnt_report_active')%>
+            <b><%=t('messages.general.causes')%></b>
+            <%=get_string_from_array(causes_not_show_in_android(@report))+'.'%>
+          <%else%>
+            <%=t('messages.report.is_report_active')%>
+          <%end%>
+        </p>
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_university_report_path(@university,@report), :class => 'btn btn-mini' %>
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+                        university_reports_path, :class => 'btn btn-mini' %>
+      </div>
+    </div>
+  </div>
+</div>

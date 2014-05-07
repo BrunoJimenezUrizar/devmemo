@@ -1,0 +1,27 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = <%= @event.id %>;																	// id del punto a cargar
+var latitude = <%= @event.latitude %>;											// Latitud del punto a cargar
+var longitude = <%= @event.longitude %>;										// Longitud del punto a cargar
+var description = "<%= @event.description %>";							// Descripción del punto de interés
+
+// Oculatamos el modal y cargamos el html del punto en el listado de events:
+$('#modal-event').modal('hide');
+$('#accordion_event').append('<%= j render(@event) %>');
+
+// Cargamos el punto en el mapa del campus, indicando que corresponde a un event:
+campusMap.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER);
+
+// Redefinimos funcion loadEvents para considerar el nuevo evento:
+function loadEvents(mapWrapperInstance){
+  //agrega marcadores de puntos de reciclaje.
+  <% @events.each do |event| %>
+    var id = <%= event.id %>;                  	// id del punto a cargar
+    var latitude = <%= event.latitude %>;	      // Latitud del punto a cargar
+    var longitude = <%= event.longitude %>;     // Longitud del punto a cargar
+    var description = '<h4><%= event.name %></h4><%if event.image.url != "/images/original/missing.png"%><div><%= image_tag event.image.url, class:"event"%></div><%end%><p><b>Descripción:</b><%= event.description %></p><p><b>Fecha de inicio:</b><%= event.start_date %></p><p><b>Fecha de término:</b><%= event.end_date %></p><p><b>Fecha de publicación:</b><br><b>Inicio:</b><%= event.start_advertising %><br><b>Término:</b><%= event.end_advertising %></p><b>Categorías:</b><ul><% event.categories.each do |category| %><li><%= category.name %></li><% end %></ul>';
+
+    // Cargamos el marcador en el mapa correspondiente:
+    mapWrapperInstance.loadMarker(id, latitude, longitude, description, MapWrapper.MarkerType.EVENT_MARKER); 
+  <% end %>
+}

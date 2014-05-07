@@ -1,0 +1,36 @@
+<h1 class="text-center">Estadísticas de <%= @university.name%></h1>
+
+<div class= "well clearfix">
+
+
+<%= form_tag('show') do %>
+<p>Desde: <%= text_field_tag "from",l(@from_date, :format=>"%Y-%m-%d"),:type=>"date"%>
+Hasta: <%= text_field_tag "to",l(@to_date, :format=>"%Y-%m-%d"),:type=>"date"%>
+<%= submit_tag "Ir", :class=>"btn"%>
+</p>
+<%end%>
+
+
+<div id='chart' class= "span6"></div>
+<%= render_chart(@chart, 'chart') %>
+
+<div class="span4 offset1">
+<h3>Estadísticas por Campus</h3>	
+<p>Selecciona los campus de los cuales quieres ver el gráfico</p>
+
+<%= form_tag('campus', :id=> "show_form") do %>
+
+<div>
+	<%= select_tag "campus", options_from_collection_for_select(@campuses, "id", "name"), multiple:true%>
+</div>
+
+	<div><br>Desde: <%= text_field_tag "from",l(1.month.ago, :format=>"%Y-%m-%d"),:type=>"date"%></div>
+	<div>Hasta: <%= text_field_tag "to",l(Time.now, :format=>"%Y-%m-%d"),:type=>"date"%></div>
+	
+	<%= submit_tag "Ir a estadísticas ", :class=>"btn"%>
+<%end%>
+
+</div>
+
+</div>
+

@@ -1,0 +1,13 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var id = <%= @poi.id %>;																	// id del punto a cargar
+var latitude = <%= @poi.latitude %>;											// Latitud del punto a cargar
+var longitude = <%= @poi.longitude %>;										// Longitud del punto a cargar
+var description = "<%= @poi.description %>";							// Descripción del punto de interés
+
+// Oculatamos el modal y cargamos el html del punto en el listado de pois:
+$('#modal-poi').modal('hide');
+$('#accordion_poi').append('<%= j render(@poi) %>');
+
+// Cargamos el punto en el mapa del campus, indicando que corresponde a un poi:
+loadMarker(id, latitude, longitude, description, campusMap, MarkerType.POI_MARKER);

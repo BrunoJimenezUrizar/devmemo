@@ -1,0 +1,6 @@
+<% if @comment.new_record? %>
+	$("#comment_body").focus();
+<% else %>
+	$("#coments").prepend("<%= j render(@comment) %>");
+	$('form#new_comment')[0].reset();
+<% end %>

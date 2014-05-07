@@ -1,0 +1,25 @@
+[
+	{"survey": {
+		"id":"<%=@survey.id%>"
+		"name":"<%=@survey.name%>",
+		"number_of_questions":<%=@questions.count%>,
+		"questions":[
+		<% @questions.each_with_index do |question, index| %>
+		{"question":{
+			"id":"<%=question.id%>"
+			"question_text":"<%=question.question_text%>",
+			"type":"<%=question.class.name.gsub("Rapidfire::Questions::","")%>",
+			<%x={}%>
+			<%question.answer_options.split(/\r?\n/).each.with_index{|q,i| x["option_"+i.to_s]=q}%>
+			"answer_options":<%=raw x.to_json %>
+			
+			}
+		<%if index == @questions.count-1 %>	
+		}
+		<%else%>
+		},
+		<%end%>
+		<%end%>
+		]
+	}
+]

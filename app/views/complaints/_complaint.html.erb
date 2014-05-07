@@ -1,0 +1,14 @@
+<tr>
+  <td><%= complaint.created_at.strftime('%e-%_m-%y, %H:%M') %></td>
+  <td><%= truncate(complaint.description, :length => 20) %></td>
+  <td><%= complaint.status %></td>
+  <td><%= complaint.complaint_type.name %></td>
+
+
+  <td>
+    <div clas="btn-toolbar">
+    	<%= link_to '<i class="icon-chevron-right"></i>'.html_safe, [complaint.campus.university, complaint.campus, complaint], :class => "btn float_right" %>
+    	<%= link_to '<i class="icon-trash icon-white"></i>'.html_safe, [complaint.campus.university, complaint.campus, complaint], :class => 'btn float_right btn-danger form_btn', :confirm => '¿Estás seguro que deseas eliminar esta denuncia? Esta acción no se puede deshacer.', :method => :delete,:title => "Eliminar" %>
+    </div>
+  </td>
+</tr>

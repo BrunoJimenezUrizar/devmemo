@@ -1,0 +1,22 @@
+<h1><%= link_to @campus.name, [@campus.university, @campus] %></h1>
+<h3>Buildings</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @buildings.each do |building| %>
+  <tr>
+    <td><%= link_to building.name, [building.campus.university, building.campus, building] %></td>
+    <td><%= link_to 'Edit', edit_university_campus_building_path(building.campus.university, building.campus, building) %></td>
+    <td><%= link_to 'Destroy', [building.campus.university, building.campus, building], :confirm => '¿Estas seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Building', new_university_campus_building_path(params[:campus_id]) %>

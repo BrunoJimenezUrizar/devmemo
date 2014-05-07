@@ -1,0 +1,26 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#from_day, #from_month, #from_year,#to_day, #to_month, #to_year{
+	width:80px;
+}
+
+#campus{
+	width: 150px;
+}
+
+th.statistics{
+	color: white;
+	background: #2c3e50;
+}
+
+td.statistics{
+	background: white;
+}
+
+#event_no_data_msg{
+	margin-top: 100px;
+}
+

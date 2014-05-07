@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	<h3 id="myModalLabel"><%= @modal_title %></h3>
+</div>
+<div class="modal-body">
+<%= link_to 'Ayuda', "#", :class=>"info" %> 
+<%= nested_form_for [@university, @campus], :remote => true do |f| %>
+ <%if @campus.errors.any? %>
+      <div id="error_explanation">Porfavor revisa los problemas que se muestran a continuacion: </div>
+      <%end%>
+    <%= f.text_field :name, :placeholder => 'Nombre del campus' %>
+    <button id="reDraw" data-map-input="polygon-redraw" class="btn btn-small" aria-hidden="true" disabled="disabled">Redibujar</button>
+
+		<%= f.text_field :address, :placeholder => 'Dirección', "data-map-input" => "address" %>
+		<a href="javascript:void(0)" id="search" data-map-input="address-search" class="btn btn-small">Buscar</a>
+		<div id="polygonMap_canvas" data-map-output="map" class="map_modal"></div>
+		<%= f.hidden_field :polygon_s, "data-map-output" => "polygon" %>
+		<%= f.hidden_field :address_coordinates, "data-map-output" => "address-coord" %>
+      <%if @campus.errors.any?%>
+      <div class= "field_with_errors"><%= @campus.errors[:polygon][0]%></div>
+      <%end%>
+
+<% end %>
+</div>
+<div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+    <button class="btn btn-primary" id="campus-save">Guardar</button>
+</div>

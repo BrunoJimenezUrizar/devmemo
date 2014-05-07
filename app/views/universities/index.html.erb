@@ -1,0 +1,19 @@
+<div class="offset3 span6">
+	<div class="well clearfix">
+		<h4>Universidades:</h4>
+		<div class="barra"></div>
+		<% if current_user.has_any_role? %>
+			<div class="panel-group" id="accordion_university">
+			  <%= render @universities %>
+			</div>
+			<br>
+			<% if current_user.has_role? :super_admin %>
+			<%= link_to '<i class="icon-plus"></i> Crear Universidad'.html_safe, new_university_path(), :class => "btn float_right", :data => {:toggle=>"modal", :target => '#modal-university'}, remote: true %>
+			<% end %>
+		<% else %>
+			<div>Usted no tiene permisos sobre ninguna universidad. Por favor comuniquese con un administrador.</div>
+		<% end %>
+	</div>
+
+</div>
+

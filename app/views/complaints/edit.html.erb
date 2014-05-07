@@ -1,0 +1,6 @@
+<h1>Editing complaint</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', [@university, @complaint.campus, @complaint] %> |
+<%= link_to 'Back', university_campus_complaints_path(@university, @complaint.campus) %>

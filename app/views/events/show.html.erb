@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+
+<h5><%= @event.name %></h5>
+
+<div>
+<%= image_tag @event.image.url %>
+</div>
+
+<p>
+  <b>Descripción:</b>
+  <%= @event.description %>
+</p>
+
+<p>
+  <b>Fecha de inicio:</b>
+  <%= @event.start_date %>
+</p>
+
+<p>
+  <b>Fecha de término:</b>
+  <%= @event.end_date %>
+</p>
+
+<p>
+  Fecha de publicación: <br>
+  <b>Inicio:</b>
+  <%= @event.start_advertising %>
+
+  <b>Término:</b>
+  <%= @event.end_advertising %>
+</p>
+
+
+
+

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag(@mobile_user.profile_picture_url)%>
+<p>
+  <b>Email:</b>
+  <%= @mobile_user.email %>
+</p>
+
+<p>
+  <b>Fb ID:</b>
+  <%= @mobile_user.fb_id%>
+</p>
+
+<p>
+  <b>Api token:</b>
+  <%= @mobile_user.api_token %>
+</p>
+
+<p>
+  <b>Access token:</b>
+  <%= @mobile_user.access_token %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%= @mobile_user.name %>
+</p>
+<p>
+  <b>Apellido:</b>
+  <%= @mobile_user.last_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_mobile_user_path(@mobile_user) %> |
+<%= link_to 'Back', mobile_users_path %>

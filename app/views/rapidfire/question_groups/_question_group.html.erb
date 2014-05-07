@@ -1,0 +1,32 @@
+<tr id= "question_group_<%= question_group.id %>">
+  <td>
+    <% if can_administer? %>
+      <% if controller.controller_name == "questions" %>
+        <%= link_to question_group.name, new_question_group_answer_group_path(question_group), remote: true %>
+      <% else %>
+        <%= link_to question_group.name, question_group_questions_path(question_group) %>
+      <% end %>
+    <% else %>
+      <%= question_group.name %>
+    <% end %>
+  </td>
+  <td>
+    <div clas="btn-toolbar">
+      <div class="btn-group">
+        <!--<%= link_to "Responder", new_question_group_answer_group_path(question_group), :class => "btn" %>-->
+        <% if can_administer? %>
+          <%= link_to "Editar", edit_question_group_path(question_group), :data => {:toggle=>"modal", :target => '#modal-survey'}, :title => "Editar Encuesta", :class => "btn", remote: true %>
+          <%= link_to "Resultados", [:results, question_group], :class => "btn" %>
+          <%= link_to "Eliminar", [question_group], method: :delete, :class => "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>   
+  </td>
+  <td>
+    <% if question_group.active? %>
+      <p class="text-success">Activa</p>
+    <% else %>
+      <p class="text-error">Inactiva</p>
+    <% end %>
+  </td>
+</tr>

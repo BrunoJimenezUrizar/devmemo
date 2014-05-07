@@ -1,0 +1,26 @@
+
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+	<div span="span3">
+		<p>
+		  <b>Punto de Reciclaje:</b>
+		  <%= @por.name %>
+		</p>
+
+		<p>
+		  <b>Descripción:</b>
+		  <%= @dump.description %>
+		</p>
+
+		<p>
+		  <b>Tipo:</b>
+		  <%= @dump.type_id %>
+		</p>
+	</div>
+	<div class="span9">
+	  <b>Qr code:</b>
+	  <%= image_tag(@url) %>
+	</div>
+</div>
+

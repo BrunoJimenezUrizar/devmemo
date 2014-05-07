@@ -1,0 +1,46 @@
+// Variables que usaremos para cargar el marcador:
+// -----------------------------------------------------------------------------------------
+var campusPolygon = "<%=@campus.encoded_polygon %>";	// polígono del campus asociado
+
+// Cargamos contenido del modal
+$("#modal-por").html('<%= j render("form") %>');
+
+<% if !@por.errors.any? %>
+// Desactivamos el evento 'shown'
+$('#modal-por').off('shown');
+// Lo volvemos a reactivar (hacemos esto para subscribirnos una única vez)
+$('#modal-por').on('shown', function(){
+	// Inicializamos el mapa:
+	pointsMap = new MapWrapper('modal-por');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+});
+<% else %>
+	// Inicializamos el mapa:
+	pointsMap = new MapWrapper('modal-por');
+	pointsMap.setCampus(campusPolygon);
+	
+	// Cargamos los objetos en el fondo del modal:
+  loadBuildings(pointsMap);
+  loadPois(pointsMap);
+  loadPors(pointsMap);
+  loadEvents(pointsMap);
+
+	// Si había un marcador, lo redibujamos:
+	<% if !@por.latitude.nil? && !@por.longitude.nil? %>
+		var id = "new_point";														// id del punto a cargar
+		var latitude = <%= @por.latitude %>;						// Latitud del punto a cargar
+		var longitude = <%= @por.longitude %>;					// Longitud del punto a cargar
+		var description = "Punto de reciclaje";					// Descripción del punto de interés
+
+		// Cargamos el punto en el mapa del campus, indicando que corresponde a un poi:
+		pointsMap.editMarker(id, latitude, longitude, description, MapWrapper.MarkerType.POI_MARKER);
+	<% end %>
+<% end %>
+
+HelpInfo('Haz click en el mapa para seleccionar la ubicación del punto de reciclaje');

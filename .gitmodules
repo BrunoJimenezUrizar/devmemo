@@ -1,0 +1,3 @@
+[submodule "rapidfire"]
+	path = rapidfire
+	url = git://github.com/oevasque/rapidfire

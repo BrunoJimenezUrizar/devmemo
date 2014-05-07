@@ -1,0 +1,27 @@
+$("#modal-building").html('<%= j render("form") %>');
+
+<% if !@campus.errors.any? %>
+// Desactivamos el evento 'shown'
+$('#modal-building').off('shown');
+// Lo volvemos a reactivar (hacemos esto para subscribirnos una única vez)
+$('#modal-building').on('shown', function(){
+	// Inicializamos el mapa:
+	polygonMap = new MapWrapper('modal-building');
+});
+<% else %>
+	// Inicializamos el mapa:
+	polygonMap = new MapWrapper('modal-building');
+
+	// Si tiene un polígono asociado, lo cargamos
+	<% if @campus.encoded_polygon != nil %>
+		var id = "new campus";													// id del edificio a cargar
+		var polygon = "<%=@campus.encoded_polygon %>";	// polígono asociado al edificio
+
+		// Cargamos polígono asociado en el mapa:
+		polygonMap.setCampus(polygon);
+		polygonMap.editBuilding(id, polygon);
+	<% end %>
+<% end %>
+
+//mensaje de ayuda
+HelpInfo('-Haz click en cada uno de los vértices del campus para dibujar el polígono. <br> -Puedes comenzar nuevamente haciendo click en "redibujar".');

@@ -1,0 +1,6 @@
+<div id="edit_floor_<%= floor.id %>">
+<i class="icon-flag"></i> <%= link_to floor.number, university_campus_building_floor_path(floor.building.campus.university, floor.building.campus, floor.building, floor), :data => {:toggle=>"modal", :target => '#modal-building'}, remote: true %>
+	<%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_university_campus_building_floor_path(floor.building.campus.university, floor.building.campus, floor.building, floor), :data => {:toggle=>"modal", :target => '#modal-building'}, remote: true %>
+	<%= link_to '<i class="icon-remove"></i>'.html_safe, [floor.building.campus.university, floor.building.campus, floor.building, floor], :confirm => '¿Estás seguro que deseas eliminar este piso?', :method => :delete, remote: true %>
+	<br>
+</div>
